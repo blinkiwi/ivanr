@@ -1,0 +1,19 @@
+{% for item in teams %}
+    <div class="group relative overflow-hidden text-center rounded-md shadow-sm shadow-gray-100 dark:shadow-gray-800 duration-500 wow animate__animated animate__fadeInUp" data-wow-delay="{{ item.data }}">
+        <div class="relative mx-auto overflow-hidden duration-500">
+            <img src="{{ item.img }}" class="" alt="">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900 opacity-0 group-hover:opacity-100 duration-500"></div>
+
+            <ul class="list-none absolute inset-s-0 inset-e-0 -bottom-20 group-hover:bottom-5 duration-500">
+                <li class="inline"><a href="" class="size-9 inline-flex items-center justify-center tracking-wider align-middle duration-500 text-base text-center bg-primary text-white rounded-full"><i class="ri-facebook-circle-line"></i></a></li>
+                <li class="inline"><a href="" class="size-9 inline-flex items-center justify-center tracking-wider align-middle duration-500 text-base text-center bg-primary text-white rounded-full"><i class="ri-instagram-line"></i></a></li>
+                <li class="inline"><a href="" class="size-9 inline-flex items-center justify-center tracking-wider align-middle duration-500 text-base text-center bg-primary text-white rounded-full"><i class="ri-linkedin-line"></i></a></li>
+            </ul><!--end icon-->
+        </div>
+
+        <div class="p-4">
+            <a href="" class="text-lg font-medium hover:text-primary duration-500">{{ item.name }}</a>
+            <p class="text-slate-400">{{ item.title }}</p>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,58 @@
+{% extends "Base/base.html" %}
+
+{% block hero_content %}
+
+{% include 'Base/navbar2.html' %}
+
+<!-- Start Hero -->
+<section class="relative table w-full py-24 bg-no-repeat bg-center bg-cover" style="background-image:url('{% static 'app/images/bg/4.jpg' %}')">
+    <div class="absolute inset-0 bg-slate-900/60"></div>
+    <div class="container relative">
+        <div class="grid grid-cols-1 text-center mt-10">
+            <h1 class="font-bold text-white lg:leading-tight leading-tight text-3xl wow animate__animated animate__fadeInUp" data-wow-delay=".4s">About Us</h1>
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+</section><!--end section-->
+<!-- End Hero -->
+
+<!-- Start -->
+<section class="relative lg:pt-24 pt-16">
+        
+    <!-- Components/Home/about.html -->
+    {% include 'Components/Home/about.html' %}
+
+</section>
+
+<section class="relative lg:py-24 py-16">
+    <div class="container relative">
+        <div class="grid grid-cols-1 pb-6 text-center">
+            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">Our Partners</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">Unleash the power of our platform with a multitude of powerful features, empowering you to achieve your goals.</p>
+        </div><!--end grid-->
+
+        <div class="grid lg:grid-cols-5 md:grid-cols-4 grid-cols-2 justify-center mt-6 gap-6">
+                
+            <!-- Components/Home/partners.html -->
+            {% include 'Components/Home/partners.html' %}
+        
+        </div><!--end grid-->
+    </div><!--end container-->
+
+    <div class="container relative md:mt-24 mt-16">
+        <div class="grid grid-cols-1 pb-8 text-center">
+            <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">FAQs</h6>
+            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">Frequently Asked Questions</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">Unleash the power of our platform with a multitude of powerful features, empowering you to achieve your goals.</p>
+        </div><!--end grid-->
+
+        <!-- Components/Home/faqs.html -->
+        {% include 'Components/Home/faqs.html' %}
+
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End -->
+
+{% endblock %}

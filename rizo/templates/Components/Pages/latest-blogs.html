@@ -1,0 +1,16 @@
+{% for item in blogs %}
+    <div class="group relative rounded-md shadow-sm shadow-gray-200 dark:shadow-gray-800 overflow-hidden wow animate__animated animate__fadeInUp" data-wow-delay="{{ item.data }}">
+        <div class="relative overflow-hidden">
+            <img src="{{ item.img }}" class="shadow-sm group-hover:scale-105 duration-500" alt="">
+        </div>
+
+        <div class="content p-6">
+            <a href="{% url 'App:single_blog' title=item.title|slugify %}" class="text-lg font-semibold hover:text-primary duration-500 ease-in-out">{{ item.title }}</a>
+            <p class="text-slate-400 mt-3">{{ item.desc }}</p>
+            
+            <div class="mt-4">
+                <a href="" class="hover:text-primary inline-flex items-center">Read More <i class="ri-arrow-right-up-line text-base ms-1 group-hover:rotate-45 duration-500"></i></a>
+            </div>
+        </div>
+    </div>
+{% endfor %}

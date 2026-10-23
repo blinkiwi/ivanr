@@ -1,0 +1,10 @@
+{% for item in posts %}
+    <div class="flex items-center mt-4">
+        <img src="{{ item.img }}" class="h-16 rounded-md shadow-sm shadow-slate-200 dark:shadow-slate-800" alt="">
+
+        <div class="ms-3">
+            <a href="" class="font-medium hover:text-primary">{{ item.title }}</a>
+            <p class="text-sm text-slate-400">{{ item.date }}</p>
+        </div>
+    </div>
+{% endfor %}

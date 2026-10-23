@@ -1,0 +1,104 @@
+{% extends "admin/index.html" %}
+{% load i18n static %}
+
+{% block content %}
+<style>
+  .ds-stat-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
+  }
+  .ds-stat-card .info h2 { font-size: 28px; font-weight: 800; margin: 0 0 2px; color: #0f172a; }
+  .ds-stat-card .info p { margin: 0; color: #64748b; font-size: 13px; }
+  .ds-stat-card .icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+  .ds-quick-card {
+    text-decoration: none; color: inherit;
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 18px;
+    padding: 24px; display: flex; flex-direction: column; gap: 12px;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);
+  }
+  .ds-quick-card .top { display: flex; align-items: center; justify-content: space-between; }
+  .ds-quick-card .avatar { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+  .ds-quick-card h3 { font-size: 17px; font-weight: 700; margin: 0; color: #0f172a; }
+  .ds-quick-card p { margin: 0; color: #64748b; font-size: 13px; }
+  .ds-quick-card .arrow { color: #3b82f6; font-weight: 700; font-size: 13px; }
+  .ds-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+</style>
+
+<div style="margin-bottom:32px;">
+  <h1 style="font-size:32px;font-weight:800;margin:0 0 6px;">Panel de Edición Visual</h1>
+  <p style="color:#64748b;margin:0;">Gestiona cada bloque del home: Header, Hero, Secciones y Footer.</p>
+</div>
+
+<div class="ds-grid" style="margin-bottom:32px;">
+  <div class="ds-stat-card">
+    <div class="info">
+      <h2 style="font-size:22px;font-weight:800;margin:0;color:#0f172a;">—</h2>
+      <p style="margin:0;color:#64748b;">Bloques totales</p>
+    </div>
+    <div class="icon" style="background:#e0f2fe;color:#0369a1;">🧱</div>
+  </div>
+  <div class="ds-stat-card">
+    <div class="info">
+      <h2 style="font-size:22px;font-weight:800;margin:0;color:#0f172a;">—</h2>
+      <p style="margin:0;color:#64748b;">Bloques visibles</p>
+    </div>
+    <div class="icon" style="background:#dcfce7;color:#15803d;">✅</div>
+  </div>
+  <div class="ds-stat-card">
+    <div class="info">
+      <h2 style="font-size:22px;font-weight:800;margin:0;color:#0f172a;">—</h2>
+      <p style="margin:0;color:#64748b;">Ocultos</p>
+    </div>
+    <div class="icon" style="background:#fef2f2;color:#b91c1c;">❌</div>
+  </div>
+</div>
+
+<div class="ds-grid">
+  <a href="{% url 'admin:App_homeblock_changelist' %}" class="ds-quick-card">
+    <div class="top">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="avatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;">▦</div>
+        <div>
+          <h3>Editar Home Completo</h3>
+          <p>Header → Footer, bloque por bloque</p>
+        </div>
+      </div>
+      <span class="arrow">Abrir →</span>
+    </div>
+  </a>
+
+  <a href="/" target="_blank" class="ds-quick-card">
+    <div class="top">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="avatar" style="background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;">↗</div>
+        <div>
+          <h3>Vista Previa del Sitio</h3>
+          <p>Ver cambios en tiempo real</p>
+        </div>
+      </div>
+      <span class="arrow" style="color:#15803d;">Ver sitio ↗</span>
+    </div>
+  </a>
+
+  <div class="ds-quick-card" style="cursor:default;">
+    <div class="top">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="avatar" style="background:linear-gradient(135deg,#a855f7,#9333ea);color:#fff;">🖼️</div>
+        <div>
+          <h3>Gestor de Imágenes</h3>
+          <p>Sube y previsualiza fotos de cada sección</p>
+        </div>
+      </div>
+      <span class="arrow" style="color:#9333ea;">Ir →</span>
+    </div>
+  </div>
+</div>
+
+{{ block.super }}
+{% endblock %}

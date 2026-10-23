@@ -1,0 +1,62 @@
+<nav id="topnav" class="defaultscroll is-sticky">
+    <div class="container relative">
+        <!-- Logo container-->
+        <a class="logo" href="{% url 'App:index' %}">
+            <span class="inline-block dark:hidden">
+                <img src="{% static 'app/images/logo-dark.png' %}" class="l-dark" alt="">
+                <img src="{% static 'app/images/logo-light.png' %}" class="l-light" alt="">
+            </span>
+            <img src="{% static 'app/images/logo-light.png' %}" class="hidden dark:inline-block" alt="">
+        </a>
+
+        <!-- End Logo container-->
+        <div class="menu-extras">
+            <div class="menu-item">
+                <!-- Mobile menu toggle-->
+                <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+                    <div class="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+                <!-- End mobile menu toggle-->
+            </div>
+        </div>
+
+        <!--Login button Start-->
+        <ul class="buy-button list-none">
+            <li class="inline">
+                <a href="" class="group h-10 px-4 text-menu tracking-wider inline-flex items-center justify-center font-medium rounded-md bg-primary/10 hover:bg-primary text-primary hover:text-white">Get in Touch <i class="ri-arrow-right-up-line text-base ms-1 group-hover:rotate-45 duration-500"></i></a>
+            </li>
+        </ul>
+        <!--Login button End-->
+
+        <div id="navigation">
+            <!-- Navigation Menu-->   
+            <ul class="navigation-menu nav-light" id="navmenu-nav">
+                <li class="has-submenu">
+                    <a class="sub-menu-item" href="#home">Home</a>
+                </li>
+                <li class="has-submenu">
+                    <a class="sub-menu-item" href="#features">Features</a>
+                </li>
+                <li class="has-submenu">
+                    <a class="sub-menu-item" href="#projects">Portfolio</a>
+                </li>
+                <li class="has-submenu">
+                    <a class="sub-menu-item" href="#pricing">Pricing</a>
+                </li>
+                <li class="has-submenu">
+                    <a class="sub-menu-item" href="#reviews">Review</a>
+                </li>
+                <li class="has-submenu">
+                    <a class="sub-menu-item" href="#blogs">Blog</a>
+                </li>
+                <li class="has-submenu">
+                    <a class="sub-menu-item" href="#contactus">Contact us</a>
+                </li>
+            </ul><!--end navigation menu-->
+        </div><!--end navigation-->
+    </div><!--end container-->
+</nav>

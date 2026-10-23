@@ -1,0 +1,322 @@
+{% extends "Base/base.html" %}
+
+{% load static %}
+
+{% block hero_content %}
+
+{% include 'Base/navbar.html' %}
+
+{# ============ HERO ============ #}
+{% if home_blocks_by_key.hero and home_blocks_by_key.hero.content %}
+    {{ home_blocks_by_key.hero.content|safe }}
+{% else %}
+<!-- Hero Start -->
+<section class="relative md:h-screen flex items-center py-36 bg-center bg-no-repeat bg-cover jarallax" data-jarallax data-speed="0.5" id="home" style="background-image:url('{% static 'app/images/bg/2.jpg' %}')">
+    <div class="absolute inset-0 bg-slate-900/60"></div>
+    <div class="container relative md:mt-16 z-10">
+        <div class="grid md:grid-cols-12 grid-cols-1 items-center gap-6">
+            <div class="lg:col-span-8 md:col-span-7">
+                <h1 class="font-bold text-white lg:leading-tight leading-tight text-4xl lg:text-6xl md:text-5xl mb-5 wow animate__animated animate__fadeInUp" data-wow-delay=".4s">Analytics That Drive <br> Better Decisions</h1>
+                <p class="text-white/70 text-lg max-w-xl wow animate__animated animate__fadeInUp" data-wow-delay=".6s">Unleash the power of our platform with a multitude of powerful features, empowering you to achieve your goals.</p>
+                
+                <div class="mt-6 wow animate__animated animate__fadeInUp" data-wow-delay=".8s">
+                    <a href="" class="group h-11 px-6 tracking-wider inline-flex items-center text-sm justify-center font-bold rounded-md bg-white text-primary me-1">Contact Us <i class="ri-arrow-right-up-line align-middle group-hover:rotate-45 duration-500 ms-1"></i></a>
+                    <a href="#!" data-type="youtube" data-id="S_CGed6E610" class="size-10 inline-flex items-center justify-center text-base rounded-full bg-primary text-white lightbox"><i class="ri-play-fill"></i></a><span class="font-semibold ms-1 text-white/70 align-middle">Watch Now</span>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-4 md:col-span-5">
+                <div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm shadow-gray-200 dark:shadow-gray-800 p-6 relative wow animate__animated animate__zoomIn" data-wow-delay=".2s">
+                    <h4 class="mb-5 text-2xl font-semibold">We are offering 14 <br> days free trial</h4>
+
+                    <form>
+                        <div class="grid grid-cols-1 gap-4">
+                            <div class="">
+                                <label class="form-label font-medium">Your Name :</label>
+                                <input type="text" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none mt-2" placeholder="Name" name="name" required>
+                            </div>
+
+                            <div class="">
+                                <label class="form-label font-medium">Your Email :</label>
+                                <input type="email" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none mt-2" placeholder="Email" name="email" required>
+                            </div>
+
+                            <div class="">
+                                <label class="form-label font-medium">Phone No. :</label>
+                                <input name="number" id="phNumber" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none mt-2" placeholder="+12 12458 854" required>
+                            </div>
+                            
+                            <div>
+                                <a href="" class="group h-10 px-4 text-menu tracking-wider inline-flex items-center justify-center font-medium rounded-md bg-primary text-white">Free Trial</a>
+                            </div>
+                        </div><!--end grid-->
+                    </form>
+                    <!-- end form -->
+                </div>
+            </div>
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+<!-- Hero End -->
+{% endif %}
+
+{# ============ ABOUT ============ #}
+<!-- Start -->
+{% if home_blocks_by_key.about and home_blocks_by_key.about.content %}
+    {{ home_blocks_by_key.about.content|safe }}
+{% else %}
+<section class="relative overflow-hidden md:py-24 py-16" id="aboutus">
+        
+    <!-- Components/Home/about.html -->
+    {% include 'Components/Home/about.html' %}
+
+</section><!--end section-->
+{% endif %}
+<!-- End -->
+
+{# ============ FEATURES ============ #}
+<!-- Start -->
+{% if home_blocks_by_key.features and home_blocks_by_key.features.content %}
+    {{ home_blocks_by_key.features.content|safe }}
+{% else %}
+<section class="relative overflow-hidden bg-slate-50 dark:bg-slate-800 md:py-24 py-16" id="features">
+    <div class="container relative">
+        <div class="grid grid-cols-1 pb-6 text-center">
+            <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">Features</h6>
+            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">Our Innovative Services</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">Unleash the power of our platform with a multitude of powerful features, empowering you to achieve your goals.</p>
+        </div><!--end grid-->
+
+        <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 mt-6 gap-6 items-center">
+                
+            <!-- Components/Home/features.html -->
+            {% include 'Components/Home/features.html' %}
+
+        </div><!--end grid-->
+    </div><!--end container-->
+
+    <div class="container relative md:mt-24 mt-16">
+        <div class="grid md:grid-cols-12 grid-cols-1 gap-6">
+                 
+            <!-- Components/Home/choose-us.html -->
+            {% include 'Components/Home/choose-us.html' %}
+
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+{% endif %}
+{% if home_blocks_by_key.choose_us and home_blocks_by_key.choose_us.content %}
+    {{ home_blocks_by_key.choose_us.content|safe }}
+{% endif %}
+<!-- End -->
+
+{# ============ PORTFOLIO ============ #}
+<!-- Start -->
+{% if home_blocks_by_key.portfolio and home_blocks_by_key.portfolio.content %}
+    {{ home_blocks_by_key.portfolio.content|safe }}
+{% else %}
+<section class="relative overflow-hidden md:py-24 py-16" id="projects">
+    <div class="container relative">
+        <div class="grid md:grid-cols-12 grid-cols-1 pb-8 items-end">
+            <div class="lg:col-span-8 md:col-span-6 md:text-start text-center">
+                <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">Portfolio</h6>
+                <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">Our Digital Portfolio</h4>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mt-6 gap-6">
+            <!-- Components/Home/portfolio.html -->
+            {% include 'Components/Home/portfolio.html' %}
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+{% endif %}
+<!-- End -->
+
+{# ============ CTA ============ #}
+<!-- Start -->
+{% if home_blocks_by_key.cta and home_blocks_by_key.cta.content %}
+    {{ home_blocks_by_key.cta.content|safe }}
+{% else %}
+<section class="py-24 w-full table relative overflow-hidden bg-center bg-cover jarallax" data-jarallax data-speed="0.5" style="background-image:url('{% static 'app/images/bg/cta.jpg' %}')">
+        
+    <!-- Components/Home/cta.html -->
+    {% include 'Components/Home/cta.html' %}
+
+</section><!--end section-->
+{% endif %}
+<!-- End -->
+
+{# ============ PRICING ============ #}
+<!-- Start -->
+{% if home_blocks_by_key.pricing and home_blocks_by_key.pricing.content %}
+    {{ home_blocks_by_key.pricing.content|safe }}
+{% else %}
+<section class="relative overflow-hidden md:py-24 py-16" id="pricing">
+    <div class="container relative">
+        <div class="grid grid-cols-1 pb-6 text-center">
+            <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">Pricing</h6>
+            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">Pricing Plan</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">Unleash the power of our platform with a multitude of powerful features, empowering you to achieve your goals.</p>
+        </div><!--end grid-->
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mt-6 gap-6">
+                
+            <!-- Components/Home/pricing.html -->
+            {% include 'Components/Home/pricing.html' %}
+
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+{% endif %}
+<!-- End -->
+
+{# ============ REVIEWS ============ #}
+<!-- Start -->
+{% if home_blocks_by_key.reviews and home_blocks_by_key.reviews.content %}
+    {{ home_blocks_by_key.reviews.content|safe }}
+{% else %}
+<section class="relative overflow-hidden bg-slate-50 dark:bg-slate-800 md:py-24 py-16" id="reviews">
+    <div class="container relative">
+        <div class="grid grid-cols-1 pb-6 text-center">
+            <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">Reviews</h6>
+            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">What our Customer Say</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">Unleash the power of our platform with a multitude of powerful features, empowering you to achieve your goals.</p>
+        </div><!--end grid-->
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 md:grid-cols-2 mt-6 items-center gap-6">
+                
+            <!-- Components/Home/reviews.html -->
+            {% include 'Components/Home/reviews.html' %}
+
+        </div><!--end grid-->
+    </div><!--end container-->
+        
+    <!-- Components/Home/map.html -->
+    {% include 'Components/Home/map.html' %}
+
+</section><!--end section-->
+{% endif %}
+<!-- End -->
+
+{# ============ BLOG ============ #}
+<!-- Start -->
+{% if home_blocks_by_key.blog and home_blocks_by_key.blog.content %}
+    {{ home_blocks_by_key.blog.content|safe }}
+{% else %}
+<section class="relative overflow-hidden md:py-24 py-16" id="blogs">
+    <div class="container relative">
+        <div class="grid grid-cols-1 pb-6 text-center">
+            <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">Blogs</h6>
+            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">Our Latest Blog</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">Unleash the power of our platform with a multitude of powerful features, empowering you to achieve your goals.</p>
+        </div><!--end grid-->
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mt-6 gap-6">
+                
+            <!-- Components/Home/blog.html -->
+            {% include 'Components/Home/blog.html' %}
+
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+{% endif %}
+<!-- End -->
+
+{# ============ CONTACT ============ #}
+<!-- Start -->
+{% if home_blocks_by_key.contact and home_blocks_by_key.contact.content %}
+    {{ home_blocks_by_key.contact.content|safe }}
+{% else %}
+<section class="relative overflow-hidden bg-slate-50 dark:bg-slate-800 md:pt-24 pt-16" id="contactus">
+    <div class="container relative">
+        <div class="grid grid-cols-1 pb-6 text-center">
+            <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">Contact Us</h6>
+            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">Get In Touch !</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">Unleash the power of our platform with a multitude of powerful features, empowering you to achieve your goals.</p>
+        </div><!--end grid-->
+
+        <div class="grid md:grid-cols-12 grid-cols-1 items-center gap-6">
+            <div class="lg:col-span-7 md:col-span-6">
+                <div class="p-6 rounded-md shadow-sm dark:shadow-gray-800 bg-white dark:bg-slate-900">
+                    <form>
+                        <div class="grid lg:grid-cols-12 lg:gap-6">
+                            <div class="lg:col-span-6 mb-5">
+                                <label for="name" class="font-medium">Your Name:</label>
+                                <input name="name" id="name" type="text" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none mt-2" placeholder="Name :">
+                            </div>
+    
+                            <div class="lg:col-span-6 mb-5">
+                                <label for="email" class="font-medium">Your Email:</label>
+                                <input name="email" id="email" type="email" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none mt-2" placeholder="Email :">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1">
+                            <div class="mb-5">
+                                <label for="subject" class="font-medium">Your Question:</label>
+                                <input name="subject" id="subject" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none mt-2" placeholder="Subject :">
+                            </div>
+
+                            <div class="mb-5">
+                                <label for="comments" class="font-medium">Your Comment:</label>
+                                <textarea name="comments" id="comments" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-28 outline-none mt-2" placeholder="Message :"></textarea>
+                            </div>
+                        </div>
+                        <button type="submit" id="submit" name="send" class="h-10 px-4 inline-flex items-center justify-center tracking-wide align-middle duration-500 text-base text-center bg-primary hover:bg-primary-600 text-white rounded-md">Send Message</button>
+                    </form>
+                </div>
+            </div><!--end col-->
+
+            <div class="lg:col-span-5 md:col-span-6">
+                <div class="lg:ms-5">
+                    <div class="flex">
+                        <div class="icons text-center mx-auto">
+                            <i class="ri-phone-fill block rounded text-2xl dark:text-white mb-0"></i>
+                        </div>
+
+                        <div class="flex-1 ms-6">
+                            <h5 class="text-lg dark:text-white mb-2 font-medium">Phone</h5>
+                            <a href="tel:+152534-468-854" class="text-slate-400">+152 534-468-854</a>
+                        </div>
+                    </div>
+
+                    <div class="flex mt-4">
+                        <div class="icons text-center mx-auto">
+                            <i class="ri-mail-fill block rounded text-2xl dark:text-white mb-0"></i>
+                        </div>
+
+                        <div class="flex-1 ms-6">
+                            <h5 class="text-lg dark:text-white mb-2 font-medium">Email</h5>
+                            <a href="mailto:contact@example.com" class="text-slate-400">contact@example.com</a>
+                        </div>
+                    </div>
+
+                    <div class="flex mt-4">
+                        <div class="icons text-center mx-auto">
+                            <i class="ri-map-pin-fill block rounded text-2xl dark:text-white mb-0"></i>
+                        </div>
+
+                        <div class="flex-1 ms-6">
+                            <h5 class="text-lg dark:text-white mb-2 font-medium">Location</h5>
+                            <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39206.002432144705!2d-95.4973981212445!3d29.709510002925988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c16de81f3ca5%3A0xf43e0b60ae539ac9!2sGerald+D.+Hines+Waterwall+Park!5e0!3m2!1sen!2sin!4v1566305861440!5m2!1sen!2sin" data-type="iframe" class="text-slate-400 lightbox">View on Google map</a>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end grid-->
+    </div><!--end container-->
+
+    <!-- Components/Home/map.html -->
+    {% include 'Components/Home/map.html' %}
+
+</section><!--end section-->
+{% endif %}
+<!-- End -->
+
+{% endblock %}

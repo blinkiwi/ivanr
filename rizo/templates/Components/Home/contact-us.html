@@ -1,0 +1,65 @@
+<div class="lg:col-span-8">
+    <div class="p-6 rounded-md shadow-sm bg-white dark:bg-slate-900 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
+        <form>
+            <p class="mb-0" id="error-msg"></p>
+            <div id="simple-msg"></div>
+            <div class="grid lg:grid-cols-12 lg:gap-6">
+                <div class="lg:col-span-6 mb-5">
+                    <input name="name" id="name" type="text" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none" placeholder="Name :">
+                </div>
+
+                <div class="lg:col-span-6 mb-5">
+                    <input name="email" id="email" type="email" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none" placeholder="Email :">
+                </div><!--end col-->
+            </div>
+
+            <div class="grid grid-cols-1">
+                <div class="mb-5">
+                    <input name="subject" id="subject" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none" placeholder="Subject :">
+                </div>
+
+                <div class="mb-5">
+                    <textarea name="comments" id="comments" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-28 outline-none textarea" placeholder="Message :"></textarea>
+                </div>
+            </div>
+            <button type="submit" id="submit" name="send" class="group h-10 px-4 text-menu tracking-wider inline-flex items-center justify-center font-medium rounded-md bg-primary/10 hover:bg-primary text-primary hover:text-white">Send Message</button>
+        </form>
+    </div>
+</div>
+
+<div class="lg:col-span-4 wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
+    <div class="lg:ms-6">
+        <div class="flex">
+            <div class="flex align-middle justify-center items-center size-12 mt-1 bg-primary/5 dark:bg-primary/10 text-primary rounded-md text-xl shadow-sm shadow-gray-200 dark:shadow-gray-800 duration-500">
+                <i class="ri-phone-line"></i>
+            </div>
+
+            <div class="flex-1 ms-3">
+                <h5 class="text-lg dark:text-white font-medium">Phone</h5>
+                <a href="tel:+152534-468-854" class="text-slate-400">+152 534-468-854</a>
+            </div>
+        </div>
+
+        <div class="flex mt-6">
+            <div class="flex align-middle justify-center items-center size-12 mt-1 bg-primary/5 dark:bg-primary/10 text-primary rounded-md text-xl shadow-sm shadow-gray-200 dark:shadow-gray-800 duration-500">
+                <i class="ri-mail-line"></i>
+            </div>
+
+            <div class="flex-1 ms-3">
+                <h5 class="text-lg dark:text-white font-medium">Email</h5>
+                <a href="mailto:contact@example.com" class="text-slate-400">contact@example.com</a>
+            </div>
+        </div>
+
+        <div class="flex mt-6">
+            <div class="flex align-middle justify-center items-center size-12 mt-1 bg-primary/5 dark:bg-primary/10 text-primary rounded-md text-xl shadow-sm shadow-gray-200 dark:shadow-gray-800 duration-500">
+                <i class="ri-map-pin-line"></i>
+            </div>
+
+            <div class="flex-1 ms-3">
+                <h5 class="text-lg dark:text-white font-medium">Location</h5>
+                <p class="text-slate-400 mb-2">C/54 Northwest Freeway, Suite 558, Houston, USA 485</p>
+            </div>
+        </div>
+    </div>
+</div>

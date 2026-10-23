@@ -1,0 +1,95 @@
+from App.models import Blog
+from django.utils.text import slugify
+
+# Define the blog data
+blogs = [
+        {
+            'id' : 1,
+            'img' : '/static/app/images/blogs/1.jpg', 
+            'title' : 'Design your apps in your own way',
+            'desc' : 'The phrasal sequence of the is now so that many campaign and benefit',
+            'data' : '.1s',
+        },
+        {
+            'id' : 2,
+            'img' : '/static/app/images/blogs/2.jpg', 
+            'title' : 'How apps is changing the IT world',
+            'desc' : 'The phrasal sequence of the is now so that many campaign and benefit',
+            'data' : '.2s',
+        },
+        {
+            'id' : 3,
+            'img' : '/static/app/images/blogs/3.jpg', 
+            'title' : 'Smartest Applications for Business',
+            'desc' : 'The phrasal sequence of the is now so that many campaign and benefit',
+            'data' : '.3s',
+        },
+        {
+            'id' : 4,
+            'img' : '/static/app/images/blogs/4.jpg', 
+            'title' : 'Mobile Marketing, Its Synthes and 2027 Offer Prognosis',
+            'desc' : 'The phrasal sequence of the is now so that many campaign and benefit',
+            'data' : '.4s',
+        },
+        {
+            'id' : 5,
+            'img' : '/static/app/images/blogs/5.jpg', 
+            'title' : 'Stop Worrying About Deadlines! We Got You Covered',
+            'desc' : 'The phrasal sequence of the is now so that many campaign and benefit',
+            'data' : '.5s',
+        },
+        {
+            'id' : 6,
+            'img' : '/static/app/images/blogs/6.jpg', 
+            'title' : 'Change Your Strategy: Find a Business Consultant',
+            'desc' : 'The phrasal sequence of the is now so that many campaign and benefit',
+            'data' : '.6s',
+        },
+        {
+            'id' : 7,
+            'img' : '/static/app/images/blogs/7.jpg', 
+            'title' : 'Everything About Financial Modeling',
+            'desc' : 'The phrasal sequence of the is now so that many campaign and benefit',
+            'data' : '.7s',
+        },
+        {
+            'id' : 8,
+            'img' : '/static/app/images/blogs/8.jpg', 
+            'title' : 'On the other hand we provide denounce',
+            'desc' : 'The phrasal sequence of the is now so that many campaign and benefit',
+            'data' : '.8s',
+        },
+        {
+            'id' : 9,
+            'img' : '/static/app/images/blogs/9.jpg', 
+            'title' : 'Organization of accounting at the enterprise',
+            'desc' : 'The phrasal sequence of the is now so that many campaign and benefit',
+            'data' : '.9s',
+        }
+    ]
+
+# Loop through the data and create blog entries
+for blog in blogs:
+    new_blog = Blog.objects.create(
+        id=blog['id'],
+        title=blog['title'],
+        img=blog['img'],
+    )
+    
+    new_blog.slug = slugify(new_blog.title)
+    new_blog.save()
+----------------------------------------------
+#check blog data
+-----------------------------------------------
+from App.models import Blog
+
+blogs = Blog.objects.all()
+for blog in blogs:
+    print(blog.title, blog.img, blog.slug)
+
+-------------------------------------------------
+#delete blog data
+-------------------------------------------------
+from App.models import Blog
+
+Blog.objects.all().delete()

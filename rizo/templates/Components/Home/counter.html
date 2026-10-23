@@ -1,0 +1,10 @@
+{% for item in counters %}
+    <div class="flex wow animate__animated animate__fadeInUp" data-wow-delay="{{ item.data }}">
+        <i class="{{ item.icon }} text-4xl text-primary/50 me-2 leading-tight"></i>
+
+        <div>
+            <h1 class="text-4xl font-semibold mb-1"><span class="counter-value" data-target="{{ item.target }}">{{ item.number }}</span>{{ item.symbol }}</h1>
+            <p class="counter-head text-slate-400 text-sm uppercase font-medium">{{ item.title }}</p>
+        </div>
+    </div>
+{% endfor %}

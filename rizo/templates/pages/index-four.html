@@ -1,0 +1,236 @@
+{% extends "Base/base.html" %}
+
+{% block hero_content %}
+
+{% include 'Base/navbar3.html' %}
+
+<!-- Start Hero -->
+<section class="relative overflow-hidden md:py-48 py-40 bg-primary/5 dark:bg-primary/10 bg-left bg-no-repeat bg-cover" id="home" style="background-image:url('{% static 'app/images/bg/bg-dot-round.png' %}')">
+    <div class="container relative mt-8">
+        <div class="grid md:grid-cols-2 grid-cols-1 gap-6 items-center">
+            <div>
+                <h1 class="font-bold lg:leading-tight leading-tight text-4xl lg:text-[54px] mb-5 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">Build 
+                    <span class="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-primary">
+                        <span class="relative text-white">Impactful</span>
+                    </span>
+                    <br>
+                    <span class="relative inline-block before:absolute before:-inset-1 before:block before:-skew-y-3 before:bg-primary">
+                        <span class="relative text-white">Brand</span>
+                    </span>
+                    Design.</h1>
+                <p class="text-slate-400 text-lg max-w-xl wow animate__animated animate__fadeInUp" data-wow-delay=".4s">Unleash the power of our platform with a multitude of powerful features, empowering you to achieve your goals.</p>
+                
+                <div class="mt-6 wow animate__animated animate__fadeInUp" data-wow-delay=".6s">
+                    <a href="" class="h-10 px-4 text-menu tracking-wider inline-flex items-center justify-center font-medium rounded-md bg-primary text-white">Learn More</a>
+                    <a href="#!" data-type="youtube" data-id="S_CGed6E610" class="size-10 inline-flex items-center justify-center text-base rounded-full bg-primary text-white lightbox"><i class="ri-play-fill"></i></a><span class="font-semibold ms-1 align-middle">Watch Now</span>
+                </div>
+            </div>
+
+            <div class="lg:ms-8">
+                <div class="relative">
+                    <img src="{% static 'app/images/contact.svg' %}" class="relative  wow animate__animated animate__fadeInUp" data-wow-delay=".6s" alt="">
+                    <div class="overflow-hidden absolute lg:size-112.5 size-87.5 bg-primary/40 bottom-1/2 translate-y-1/2 inset-s-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 -z-1 shadow-md shadow-primary/10 rounded-full wow animate__animated animate__zoomIn" data-wow-delay=".4s"></div>
+                    <div class="overflow-hidden absolute lg:size-150 size-125 bg-primary/10 bottom-1/2 translate-y-1/2 inset-s-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2 -z-1 shadow-md shadow-primary/10 rounded-full wow animate__animated animate__zoomIn" data-wow-delay=".2s"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!--end section-->
+<!-- End Hero -->
+
+<!-- Start -->
+<section class="relative overflow-hidden md:py-24 py-16" id="aboutus">
+        
+    <!-- Components/Home/about.html -->
+    {% include 'Components/Home/about.html' %}
+
+</section><!--end section-->
+<!-- End -->
+
+<!-- Start -->
+<section class="relative overflow-hidden bg-slate-50 dark:bg-slate-800 md:py-24 py-16" id="features">
+    <div class="container relative">
+        <div class="grid grid-cols-1 pb-6 text-center">
+            <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">Features</h6>
+            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">Our Innovative Services</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">Unleash the power of our platform with a multitude of powerful features, empowering you to achieve your goals.</p>
+        </div><!--end grid-->
+
+        <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 mt-6 gap-6 items-center">
+                
+            <!-- Components/Home/features.html -->
+            {% include 'Components/Home/features.html' %}
+
+        </div><!--end grid-->
+    </div><!--end container-->
+
+    <div class="container relative md:mt-24 mt-16">
+        <div class="grid md:grid-cols-12 grid-cols-1 gap-6">
+                
+            <!-- Components/Home/choose-us.html -->
+            {% include 'Components/Home/choose-us.html' %}
+
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End -->
+
+<!-- Start -->
+<section class="relative overflow-hidden md:py-24 py-16" id="projects">
+    <div class="container relative">
+        <div class="grid md:grid-cols-12 grid-cols-1 pb-8 items-end">
+            <div class="lg:col-span-8 md:col-span-6 md:text-start text-center">
+                <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">Portfolio</h6>
+                <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">Our Digital Portfolio</h4>
+                <p class="text-slate-400 max-w-xl wow animate__animated animate__fadeInUp" data-wow-delay=".6s">Unleash the power of our platform with a multitude of powerful features, empowering you to achieve your goals.</p>
+            </div>
+
+            <div class="lg:col-span-4 md:col-span-6 md:text-end hidden md:block">
+                <a href="" class="group h-10 px-4 text-menu tracking-wider inline-flex items-center justify-center font-medium rounded-md bg-primary/10 hover:bg-primary text-primary hover:text-white">See More Portfolio <i class="ri-arrow-right-up-line text-base ms-1 group-hover:rotate-45 duration-500"></i></a>
+            </div>
+        </div><!--end grid-->
+
+        <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 mt-6">
+                
+            <!-- Components/Home/portfolio.html -->
+            {% include 'Components/Home/portfolio.html' %}
+
+        </div><!--end grid-->
+
+        <div class="flex justify-center mx-auto mt-6 text-center md:hidden">
+            <a href="" class="group h-10 px-4 text-menu tracking-wider inline-flex items-center justify-center font-medium rounded-md bg-primary/10 hover:bg-primary text-primary hover:text-white">See More Portfolio <i class="ri-arrow-right-up-line text-base ms-1 group-hover:rotate-45 duration-500"></i></a>
+        </div>
+    </div><!--end container-->
+
+    <div class="container relative md:mt-24 mt-16">
+        <div class="grid grid-cols-1 pb-6 text-center">
+            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">Our Partners</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">Unleash the power of our platform with a multitude of powerful features, empowering you to achieve your goals.</p>
+        </div><!--end grid-->
+
+        <div class="grid lg:grid-cols-5 md:grid-cols-4 grid-cols-2 justify-center mt-6 gap-6">
+                
+            <!-- Components/Home/partners.html -->
+            {% include 'Components/Home/partners.html' %}
+        
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End -->
+
+<!-- Start -->
+<section class="py-24 w-full table relative overflow-hidden bg-center bg-cover jarallax" data-jarallax data-speed="0.5" style="background-image:url('{% static 'app/images/bg/cta.jpg' %}')">
+        
+    <!-- Components/Home/cta.html -->
+    {% include 'Components/Home/cta.html' %}
+
+</section><!--end section-->
+<!-- End -->
+
+<!-- Start -->
+<section class="relative overflow-hidden md:py-24 py-16" id="pricing">
+    <div class="container relative">
+        <div class="grid lg:grid-cols-12 grid-cols-1 items-center gap-6">
+                
+            <!-- Components/Home/pricing.html -->
+            {% include 'Components/Home/pricing.html' %}
+
+        </div><!--end grid-->
+    </div><!--end container-->
+
+    <div class="container relative md:mt-24 mt-16">
+        <div class="grid grid-cols-1 pb-8 text-center">
+            <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">FAQs</h6>
+            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">Frequently Asked Questions</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">Unleash the power of our platform with a multitude of powerful features, empowering you to achieve your goals.</p>
+        </div><!--end grid-->
+
+        <!-- Components/Home/faqs.html -->
+        {% include 'Components/Home/faqs.html' %}
+
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End -->
+
+<!-- Start -->
+<section class="relative overflow-hidden bg-slate-50 dark:bg-slate-800 md:py-24 py-16" id="reviews">
+    <div class="container relative">
+        <div class="grid lg:grid-cols-12 grid-cols-1 items-center gap-6">
+            <div class="lg:col-span-6 lg:text-start text-center lg:pb-0 pb-6">
+                <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">Testimonial</h6>
+                <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">What Our Users Are <br> Saying About us</h4>
+                <p class="text-slate-400 max-w-xl lg:ms-auto mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">Unleash the power of our platform with a multitude of powerful features, empowering you to achieve your goals.</p>
+            </div>
+
+            <div class="lg:col-span-6 lg:ms-6 lg:mt-0 mt-6">
+                <div class="tiny-single-item wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
+                        
+                    <!-- Components/Home/reviews.html -->
+                    {% include 'Components/Home/reviews.html' %}
+
+                </div>
+            </div>
+        </div>
+
+        <div class="grid lg:grid-cols-12 grid-cols-1 md:text-start mt-10 justify-center">
+            <div class="lg:col-start-2 lg:col-span-10">
+                <div class="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 items-center gap-6 ">
+                        
+                    <!-- Components/Home/counter.html -->
+                    {% include 'Components/Home/counter.html' %}
+                
+                </div>
+            </div>
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End -->
+
+<!-- Start -->
+<section class="relative overflow-hidden md:py-24 py-16" id="blogs">
+    <div class="container relative">
+        <div class="grid grid-cols-1 pb-8 text-center">
+            <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">Blog</h6>
+                <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">Latest News</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">Unleash the power of our platform with a multitude of powerful features, empowering you to achieve your goals.</p>
+        </div><!--end grid-->
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mt-6 gap-6">
+                
+            <!-- Components/Home/blog.html -->
+            {% include 'Components/Home/blog.html' %}
+
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End -->
+
+<!-- Start -->
+<section class="relative overflow-hidden bg-slate-50 dark:bg-slate-800 md:pt-24 pt-16" id="contactus">
+    <div class="container relative">
+        <div class="grid grid-cols-1 pb-8 text-center">
+            <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">Contact us</h6>
+                <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">Get In Touch !</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">Unleash the power of our platform with a multitude of powerful features, empowering you to achieve your goals.</p>
+        </div><!--end grid-->
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 md:grid-cols-2 mt-6 items-center gap-6">
+                
+            <!-- Components/Home/contact-us.html -->
+            {% include 'Components/Home/contact-us.html' %}
+
+        </div><!--end grid-->
+    </div><!--end container-->
+        
+    <!-- Components/Home/map.html -->
+    {% include 'Components/Home/map.html' %}
+
+</section><!--end section-->
+<!-- End -->
+
+{% endblock %}
