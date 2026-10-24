@@ -20,19 +20,24 @@
                 </ul>
             </div>
 
-            <div class="mt-6 flex items-center wow animate__animated animate__fadeInUp" data-wow-delay="1s">
-                <div class="flex items-center me-2">
-                    <img src="{% if sections.about.extra_image %}{{ sections.about.extra_image }}{% else %}{% static 'app/images/client/01.jpg' %}{% endif %}" class="rounded-full size-10 shadow-sm shadow-gray-200 dark:shadow-gray-800 me-2" alt="{{ sections.about.person_text }}">
-
-                    <span class="text-slate-400">Hi, This is <a href="{{ hero.button_link }}" class="font-semibold text-slate-900 dark:text-white">{{ sections.about.person_text }}</a></span>
+            <div class="mt-6 wow animate__animated animate__fadeInUp" data-wow-delay="1s">
+                {% static 'app/images/client/01.jpg' as avatar_default %}
+                <div class="flex items-center">
+                    <img src="{% firstof sections.about.extra_image avatar_default %}" class="rounded-full size-10 shadow-sm shadow-gray-200 dark:shadow-gray-800 me-2" alt="{{ sections.about.person_text }}">
+                    <span class="bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-800 font-semibold uppercase tracking-wider text-xs px-3 py-1.5 rounded-md">{{ sections.about.badge_text }}</span>
                 </div>
 
-                <span class="bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-800 font-semibold uppercase tracking-wider text-xs px-3 py-1.5 rounded-md">{{ sections.about.badge_text }}</span>
+                <div class="about-dup flex items-center">
+                    <img src="{% firstof sections.about.extra_image_dup sections.about.extra_image avatar_default %}" class="rounded-full size-10 shadow-sm shadow-gray-200 dark:shadow-gray-800 me-2" alt="{{ sections.about.person_text }}">
+                    <span class="bg-white dark:bg-slate-900 shadow-sm shadow-gray-200 dark:shadow-gray-800 font-semibold uppercase tracking-wider text-xs px-3 py-1.5 rounded-md">{{ sections.about.badge_text_dup|default:sections.about.badge_text }}</span>
+                </div>
             </div>
 
+            {% if sections.about.show_learn_more %}
             <div class="mt-6 wow animate__animated animate__fadeInUp" data-wow-delay="1.2s">
                 <a href="{{ sections.about.button_url }}" class="group h-10 px-4 text-menu tracking-wider inline-flex items-center justify-center font-medium rounded-md bg-primary/10 hover:bg-primary text-primary hover:text-white">{{ sections.about.button_label }} <i class="ri-arrow-right-up-line text-base ms-1 group-hover:rotate-45 duration-500"></i></a>
             </div>
+            {% endif %}
         </div>
 
         <div class="lg:col-span-6 md:col-span-6 md:ms-8 md:order-2 order-1">
@@ -40,14 +45,17 @@
                 <div class="relative">
                     <img src="{% if sections.about.image %}{{ sections.about.image }}{% else %}{% static 'app/images/about.jpg' %}{% endif %}" class="mx-auto rounded-lg shadow-sm shadow-gray-200 dark:shadow-gray-800 wow animate__animated animate__fadeInUp" data-wow-delay=".5s" alt="{{ sections.about.title }}">
 
+                    {% if sections.about.show_play %}
                     <div class="absolute top-4 -inset-e-2 text-center">
                         <a href="#!" data-type="youtube" data-id="{{ hero.video_id }}"
                             class="lightbox size-20 rounded-full shadow-sm shadow-gray-200 dark:shadow-gray-800 inline-flex items-center justify-center text-white bg-primary">
                             <i class="ri-play-fill inline-flex items-center justify-center text-2xl"></i>
                         </a>
                     </div>
+                    {% endif %}
                 </div>
 
+                {% if sections.about.show_stat %}
                 <div class="absolute flex justify-between items-center bottom-16 md:-inset-s-10 -inset-s-5 p-4 rounded-lg shadow-sm shadow-gray-200 dark:shadow-gray-800 bg-white dark:bg-slate-900 w-64 m-3 wow animate__animated animate__fadeInUp" data-wow-delay="1s">
                     <div class="flex items-center">
                         <div class="flex align-middle justify-center items-center size-12 mt-1 bg-primary/5 dark:bg-primary/10 text-primary rounded-md text-xl shadow-sm shadow-gray-200 dark:shadow-gray-800 duration-500">
@@ -61,6 +69,7 @@
 
                     <span class="text-green-600"><i class="ri-line-chart-line"></i> {{ sections.about.stat_percent }}</span>
                 </div>
+                {% endif %}
             </div>
         </div>
     </div><!--end grid-->

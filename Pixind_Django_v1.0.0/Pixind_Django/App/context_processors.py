@@ -5,6 +5,7 @@ que son exactamente los textos/imagenes originales de la plantilla.
 """
 from django.conf import settings
 from django.templatetags.static import static
+import re
 
 from .models import (
     SiteConfig, StickyNav, NavItem, HeaderBlock, SectionBlock, FeatureBlock,
@@ -53,7 +54,8 @@ def _section_dict(key, obj):
     data = dict(D.SECTIONS.get(key, {}))
     if obj:
         for field in ('eyebrow', 'title', 'description', 'button_label', 'button_url',
-                      'badge_text', 'person_text', 'checklist', 'embed_url',
+                      'title_font', 'title_size', 'title_color',
+                      'badge_text', 'badge_text_dup', 'person_text', 'checklist', 'embed_url',
                       'stat_label', 'stat_number', 'stat_percent',
                       'form_name_label', 'form_email_label', 'form_subject_label',
                       'form_message_label', 'form_button_label'):
@@ -62,17 +64,67 @@ def _section_dict(key, obj):
                 data[field] = value
         if getattr(obj, 'stat_target', None):
             data['stat_target'] = obj.stat_target
+        for field in ('show_stat', 'show_learn_more', 'show_play'):
+            if hasattr(obj, field):
+                data[field] = bool(getattr(obj, field))
         if obj.image:
             data['image'] = media_url(obj.image.name)
         if obj.background_image:
             data['background_image'] = media_url(obj.background_image.name)
         if obj.extra_image:
             data['extra_image'] = media_url(obj.extra_image.name)
+        if obj.extra_image_dup:
+            data['extra_image_dup'] = media_url(obj.extra_image_dup.name)
     if 'checklist' in data:
         data['checklist'] = [c.strip() for c in data['checklist'].splitlines() if c.strip()]
     if 'title' in data:
         data['title_html'] = data['title'].replace('\n', '<br>')
+    # estilo del titulo (tipografia/tamano/color) -> atributo style del titulo
+    estilo = []
+    if data.get('title_font') == 'waterfall':
+        estilo.append("font-family:'Waterfall','Brush Script MT',cursive")
+    tam = str(data.get('title_size') or '').strip()
+    if re.fullmatch(r'\d+(\.\d{1,2})?(px|rem|em|%|vw|pt)?', tam):
+        if tam[-1].isdigit():
+            tam += 'px'
+        estilo.append('font-size:' + tam)
+    col = _hx(data.get('title_color'))
+    if col:
+        estilo.append('color:' + col)
+    data['title_style'] = ';'.join(estilo)
     return data
+
+
+_HEX_RE = re.compile(r'#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{3})$')
+
+
+def _hx(v):
+    """Color hex valido (#rgb/#rrggbb) o cadena vacia (se usa el original)."""
+    v = (v or '').strip()
+    return v if _HEX_RE.match(v) else ''
+
+
+def _palette_extra(pal):
+    """Reglas CSS de hover/texto/fondo (el primario se sirve reescribiendo tailwind.css)."""
+    css = []
+    hov, txt, bg = _hx(pal.get('hover')), _hx(pal.get('text')), _hx(pal.get('bg'))
+    if hov:
+        css += [
+            f'.hover\\:bg-primary:hover{{background-color:{hov}!important}}',
+            f'.hover\\:text-primary:hover{{color:{hov}!important}}',
+            f'.hover\\:border-primary:hover{{border-color:{hov}!important}}',
+            f'.group-hover\\:bg-primary:is(:where(.group):hover *){{background-color:{hov}!important}}',
+            f'.dark .dark\\:hover\\:bg-primary:hover{{background-color:{hov}!important}}',
+            f'.dark .dark\\:hover\\:border-primary:hover{{border-color:{hov}!important}}',
+        ]
+    if txt:
+        css.append('body{color:%s!important}'
+                   '[class*="text-slate-900"],[class*="text-slate-800"],[class*="text-slate-700"],'
+                   '[class*="text-slate-600"],[class*="text-slate-400"],[class*="text-slate-300"]'
+                   '{color:%s!important}' % (txt, txt))
+    if bg:
+        css.append(f'html,body{{background-color:{bg}!important}}')
+    return ''.join(css)
 
 
 def _rows(model, limit=None):
@@ -120,6 +172,7 @@ def global_context(request):
                       media_url(logo.name) if logo else static('app/images/logo-dark.png'))
     sticky = {
         'logo': nav_logo,
+        'logo_scroll': media_url(nav.logo_scroll.name) if nav and nav.logo_scroll else '',
         'cta_label': (nav.cta_label if nav else None) or D.STICKY_NAV['cta_label'],
         'cta_url': (nav.cta_url if nav else '') or D.STICKY_NAV['cta_url'],
     }
@@ -127,6 +180,7 @@ def global_context(request):
     # --- secciones ---------------------------------------------------------
     section_objs = {s.key: s for s in _rows(SectionBlock)}
     sections = {key: _section_dict(key, section_objs.get(key)) for key in D.SECTIONS}
+    load_waterfall = any(v.get('title_font') == 'waterfall' for v in sections.values())
 
     # --- listas ------------------------------------------------------------
     feature_objs = _rows(FeatureBlock)
@@ -237,6 +291,18 @@ def global_context(request):
         'show_theme_switcher': (site.show_theme_switcher if site else D.SITE['show_theme_switcher']),
         'show_rtl_switcher': (site.show_rtl_switcher if site else D.SITE['show_rtl_switcher']),
         'default_theme': (site.default_theme if site else D.SITE['default_theme']),
+        # paleta de colores (vacio = color original de la plantilla)
+        'palette': {
+            'primary': _hx(site.color_primary if site else ''),
+            'text': _hx(site.color_text if site else ''),
+            'hover': _hx(site.color_hover if site else ''),
+            'bg': _hx(site.color_bg if site else ''),
+        },
+        'palette_css': _palette_extra({
+            'hover': site.color_hover if site else '',
+            'text': site.color_text if site else '',
+            'bg': site.color_bg if site else '',
+        }),
         # sitio / head
         'site_name': site_name,
         'meta_title': meta_title,
@@ -252,6 +318,8 @@ def global_context(request):
         'hero': _hero_dict(hero_obj),
         # secciones
         'sections': sections,
+        # tipografia Waterfall (solo se carga si alguna seccion la usa)
+        'load_waterfall': load_waterfall,
         # listas del home
         'features': features,
         'service_tabs': service_tabs,

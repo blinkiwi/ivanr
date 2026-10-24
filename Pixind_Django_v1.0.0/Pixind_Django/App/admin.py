@@ -50,6 +50,12 @@ class SiteConfigAdmin(admin.ModelAdmin):
             'fields': ('default_theme', 'show_theme_switcher', 'show_rtl_switcher'),
             'description': 'Tema por defecto (oscuro) y activar/desactivar los botones flotantes de tema y LTR/RTL de la web.',
         }),
+        ('Paleta de colores', {
+            'fields': ('color_primary', 'color_text', 'color_hover', 'color_bg'),
+            'description': 'Formato #rrggbb. Vacio = color original de la plantilla. '
+                           'Primario: botones/enlaces/iconos · Texto: cuerpo y titulos · '
+                           'Hover: al pasar el mouse · Fondo: fondo general del sitio.',
+        }),
         ('Tecnicos', {'fields': ('created_at', 'updated_at'), 'classes': ('collapse',)}),
     )
     readonly_fields = ('created_at', 'updated_at')
@@ -58,6 +64,13 @@ class SiteConfigAdmin(admin.ModelAdmin):
 @admin.register(StickyNav)
 class StickyNavAdmin(admin.ModelAdmin):
     list_display = ('cta_label', 'cta_url')
+    fieldsets = (
+        ('Logos del header', {
+            'fields': ('logo', 'logo_scroll'),
+            'description': 'El segundo logo aparece cuando el header se pega al hacer scroll (nav-sticky).',
+        }),
+        ('Boton de accion', {'fields': ('cta_label', 'cta_url')}),
+    )
 
     def has_add_permission(self, request):
         return not StickyNav.objects.exists()  # singleton
@@ -102,11 +115,16 @@ class SectionBlockAdmin(admin.ModelAdmin):
         ('Seccion', {'fields': ('key', 'order')}),
         ('Cabecera (texto)', {'fields': ('eyebrow', 'title', 'description')}),
         ('Boton', {'fields': ('button_label', 'button_url')}),
-        ('Imagenes / fondo', {'fields': ('image', 'background_image', 'extra_image')}),
-        ('Solo About', {'fields': ('badge_text', 'person_text', 'checklist')}),
+        ('Imagenes / fondo', {'fields': ('image', 'background_image', 'extra_image', 'extra_image_dup')}),
+        ('Solo About', {'fields': ('badge_text', 'badge_text_dup', 'person_text', 'checklist')}),
         ('Solo About (stat flotante)', {
             'fields': ('stat_label', 'stat_number', 'stat_target', 'stat_percent'),
             'classes': ('collapse',),
+        }),
+        ('Solo About (mostrar / ocultar)', {
+            'fields': ('show_stat', 'show_learn_more', 'show_play'),
+            'description': 'Marcado = visible en la web. Apaga la stat flotante, el boton '
+                           'Learn More o el boton play de la seccion About (solo aplica a la fila About).',
         }),
         ('Solo Mapa', {'fields': ('embed_url',)}),
         ('Solo Contacto (placeholders del formulario)', {
@@ -114,6 +132,22 @@ class SectionBlockAdmin(admin.ModelAdmin):
                        'form_message_label', 'form_button_label'),
         }),
     )
+
+    def get_fieldsets(self, request, obj=None):
+        """La personalizacion del titulo (tipografia/tamano/color) solo se muestra
+        en la seccion 5 (Partners), que es donde aplica."""
+        fieldsets = super().get_fieldsets(request, obj)
+        if obj is None or obj.key != 'partners':
+            return fieldsets
+        out = []
+        for name, opts in fieldsets:
+            if name == 'Cabecera (texto)':
+                opts = dict(opts)
+                opts['fields'] = tuple(opts['fields']) + ('title_font', 'title_size', 'title_color')
+                opts['description'] = ('Personaliza el titulo de la seccion 5 (Partners): '
+                                       'tipografia Waterfall, tamano y color. Vacio = estilo original.')
+            out.append((name, opts))
+        return tuple(out)
 
 
 @admin.register(FeatureBlock)

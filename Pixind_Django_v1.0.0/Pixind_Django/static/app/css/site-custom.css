@@ -35,3 +35,17 @@ footer a > img {
     #topnav .logo img { max-height: 44px; }
     footer a > img { max-width: 150px; max-height: 42px; }
 }
+
+/* ==========================================================================
+   Segundo logo (panel → Header/botonera sticky → "Logo al hacer scroll"):
+   oculto por defecto; al hacer scroll el header gana .nav-sticky y ahí se
+   muestra este logo en lugar del principal.
+   ========================================================================== */
+.logo-scroll { display: none !important; }
+#topnav.nav-sticky .logo-scroll { display: inline-block !important; }
+#topnav.nav-sticky .logo-default { display: none !important; }
+
+/* About: la imagen secundaria se DUPLICA debajo de la original con 25px de
+   separación vertical exacta; cada imagen lleva su propia insignia al lado
+   (el texto se pinta dos veces desde el mismo campo del panel). */
+.about-dup { margin-top: 25px; }

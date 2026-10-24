@@ -59,13 +59,13 @@ def build_blocks():
 
     return [
         add_card("⚙", "Sitio, logo y favicon",
-                 "Nombre, título de pestaña, logo, favicon y copyright",
+                 "Nombre, título de pestaña, logo, favicon, copyright y paleta de colores",
                  SiteConfig,
                  (site.site_name if site else "Sin configurar") +
                  (" · " + (site.copyright_text or "")[:38] if site else ""),
                  singleton=True),
         add_card("☗", "Header / botonera sticky",
-                 "Logo del menú y botón de acción principal",
+                 "Logo del menú, logo al hacer scroll y botón de acción principal",
                  StickyNav,
                  (f"Botón: {nav.cta_label}" if nav else "Sin configurar"),
                  singleton=True),

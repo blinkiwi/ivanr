@@ -74,6 +74,9 @@ SECTIONS = {
         'stat_number': '39548',
         'stat_target': 45485,
         'stat_percent': '3.85%',
+        'show_stat': True,
+        'show_learn_more': True,
+        'show_play': True,
     },
     'features': {
         'eyebrow': 'Features',

@@ -2,14 +2,17 @@ from django.urls import path
 from .views import (
     IndexView,IndexTwoView,IndexThreeView,IndexFourView,IndexFiveView,IndexMultiView,
     AboutusView,FeaturesView,BlogView,SingleBlogView,PortfolioView,SinglePortfolioView,
-    PricingView,TeamView,ContactusView
+    PricingView,TeamView,ContactusView,rz_palette_css
 )
 
 app_name = 'App'
 
 urlpatterns = [
     path("", IndexFiveView.as_view(), name="index"),
-    
+
+    # tailwind.css con el primario de la paleta aplicada
+    path("rz-palette.css", rz_palette_css, name="rz_palette_css"),
+
     path("index-two/", IndexTwoView.as_view(), name="index_two"),
     path("index-three/", IndexThreeView.as_view(), name="index_three"),
     path("index-four/", IndexFourView.as_view(), name="index_four"),

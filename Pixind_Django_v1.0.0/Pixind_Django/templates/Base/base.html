@@ -29,8 +29,19 @@
         <link href="{% static 'app/libs/animate.css/animate.min.css' %}" rel="stylesheet">
         <link href="{% static 'app/libs/remixicon/fonts/remixicon.css' %}" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{% static 'app/css/output.css' %}">
+        {% if load_waterfall %}
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Waterfall&display=swap" rel="stylesheet">
+        {% endif %}
+        {% if palette.primary %}
+        <link rel="stylesheet" href="{% url 'App:rz_palette_css' %}?v={{ admin_assets_version }}{{ palette.primary|cut:'#' }}">
+        {% else %}
         <link rel="stylesheet" href="{% static 'app/css/tailwind.css' %}">
+        {% endif %}
         <link rel="stylesheet" href="{% static 'app/css/site-custom.css' %}?v={{ admin_assets_version }}">
+        {% if palette_css %}
+        <style id="rz-palette">{{ palette_css|safe }}</style>
+        {% endif %}
         {% block css %}{% endblock %}
     </head>
     

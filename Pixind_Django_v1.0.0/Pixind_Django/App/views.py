@@ -3,8 +3,39 @@ from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView
 from django.views.decorators.http import require_http_methods
 from django.utils.decorators import method_decorator
+from django.http import HttpResponse
+from django.conf import settings
+import os
+import re
 from .models import Blog
 from .models import Portfolio
+
+# cache de la hoja de estilos con la paleta: {color: css}
+_PALETTE_CACHE = {}
+_DEFAULT_PRIMARY = '#4ec163'
+_HEX_RE = re.compile(r'#(?:[0-9a-fA-F]{6}|[0-9a-fA-F]{3})')
+
+
+def rz_palette_css(request):
+    """tailwind.css con el color primario de la paleta reescrito (SiteConfig.color_primary)."""
+    from .models import SiteConfig
+    site = SiteConfig.objects.first()
+    color = ((site.color_primary if site else '') or '').strip()
+    if not _HEX_RE.fullmatch(color):
+        color = _DEFAULT_PRIMARY
+    key = color.lower()
+    css = _PALETTE_CACHE.get(key)
+    if css is None:
+        ruta = os.path.join(settings.BASE_DIR, 'static', 'app', 'css', 'tailwind.css')
+        try:
+            with open(ruta, encoding='utf-8') as f:
+                css = f.read()
+        except OSError:
+            return HttpResponse('', content_type='text/css')
+        css = css.replace(_DEFAULT_PRIMARY, color).replace(_DEFAULT_PRIMARY.upper(), color.upper())
+        _PALETTE_CACHE.clear()
+        _PALETTE_CACHE[key] = css
+    return HttpResponse(css, content_type='text/css')
 
 # Create your views here.
 

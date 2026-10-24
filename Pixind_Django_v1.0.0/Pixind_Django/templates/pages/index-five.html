@@ -120,7 +120,7 @@
 
     <div class="container relative md:mt-24 mt-16">
         <div class="grid grid-cols-1 pb-6 text-center">
-            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">{{ sections.partners.title_html|safe }}</h4>
+            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s"{% if sections.partners.title_style %} style="{{ sections.partners.title_style }}"{% endif %}>{{ sections.partners.title_html|safe }}</h4>
 
             <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">{{ sections.partners.description }}</p>
         </div><!--end grid-->

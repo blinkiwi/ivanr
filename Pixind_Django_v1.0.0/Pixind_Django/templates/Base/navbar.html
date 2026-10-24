@@ -2,11 +2,14 @@
     <div class="container relative">
         <!-- Logo container-->
         <a class="logo" href="{% url 'App:index' %}">
-            <span class="inline-block dark:hidden">
+            <span class="inline-block dark:hidden logo-default">
                 <img src="{{ sticky.logo }}" class="l-dark" alt="{{ site_name }}">
                 <img src="{{ sticky.logo }}" class="l-light" alt="{{ site_name }}">
             </span>
-            <img src="{{ sticky.logo }}" class="hidden dark:inline-block" alt="{{ site_name }}">
+            <img src="{{ sticky.logo }}" class="hidden dark:inline-block logo-default" alt="{{ site_name }}">
+            {% if sticky.logo_scroll %}
+            <img src="{{ sticky.logo_scroll }}" class="logo-scroll" alt="{{ site_name }}">
+            {% endif %}
         </a>
 
         <!-- End Logo container-->

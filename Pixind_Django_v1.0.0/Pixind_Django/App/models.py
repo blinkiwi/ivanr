@@ -26,6 +26,14 @@ class SiteConfig(models.Model):
     THEME_CHOICES = [('dark', 'Oscuro (predeterminado)'), ('light', 'Claro'), ('auto', 'Según el sistema')]
     default_theme = models.CharField(max_length=10, choices=THEME_CHOICES, default='dark',
                                      verbose_name='Tema por defecto del sitio')
+    color_primary = models.CharField(max_length=9, default='', blank=True,
+                                     verbose_name='Paleta: color primario (#hex, vacio = original)')
+    color_text = models.CharField(max_length=9, default='', blank=True,
+                                  verbose_name='Paleta: color de texto (#hex, vacio = original)')
+    color_hover = models.CharField(max_length=9, default='', blank=True,
+                                   verbose_name='Paleta: color al pasar el mouse (#hex, vacio = original)')
+    color_bg = models.CharField(max_length=9, default='', blank=True,
+                                verbose_name='Paleta: color de fondo (#hex, vacio = original)')
     logo = models.ImageField(upload_to='site_logos/', blank=True, null=True, verbose_name='Logo')
     favicon = models.ImageField(upload_to='site_favicons/', blank=True, null=True, verbose_name='Favicon')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -43,6 +51,8 @@ class StickyNav(models.Model):
     """Header sticky (botonera): logo + boton de accion. Singleton."""
     logo = models.ImageField(upload_to='nav_logos/', blank=True, null=True,
                              verbose_name='Logo del header (si esta vacio usa el del Sitio)')
+    logo_scroll = models.ImageField(upload_to='nav_logos/', blank=True, null=True,
+                                    verbose_name='Logo al hacer scroll (segundo logo, se activa al pegarse el header)')
     cta_label = models.CharField(max_length=100, default='Get in Touch', verbose_name='Texto del boton')
     cta_url = models.CharField(max_length=255, default='', blank=True, verbose_name='Enlace del boton')
 
@@ -121,6 +131,13 @@ class SectionBlock(models.Model):
     eyebrow = models.CharField(max_length=255, default='', blank=True, verbose_name='Texto pequeno superior')
     title = models.CharField(max_length=255, default='', blank=True, verbose_name='Titulo')
     description = models.TextField(default='', blank=True, verbose_name='Descripcion')
+    TITLE_FONTS = [('', 'Por defecto de la plantilla'), ('waterfall', 'Waterfall (Google Fonts)')]
+    title_font = models.CharField(max_length=20, choices=TITLE_FONTS, default='', blank=True,
+                                  verbose_name='Tipografia del titulo (seccion 5 · Partners)')
+    title_size = models.CharField(max_length=12, default='', blank=True,
+                                  verbose_name='Tamano del titulo (ej. 48px, 3rem; vacio = original)')
+    title_color = models.CharField(max_length=9, default='', blank=True,
+                                   verbose_name='Color del titulo (#hex; vacio = original)')
     button_label = models.CharField(max_length=100, default='', blank=True, verbose_name='Texto del boton')
     button_url = models.CharField(max_length=255, default='', blank=True, verbose_name='Enlace del boton')
     image = models.ImageField(upload_to='sections/', blank=True, null=True, verbose_name='Imagen de la seccion')
@@ -129,7 +146,11 @@ class SectionBlock(models.Model):
     embed_url = models.URLField(default='', blank=True, verbose_name='URL de mapa embebido (solo seccion map)')
     extra_image = models.ImageField(upload_to='sections/', blank=True, null=True,
                                     verbose_name='Imagen secundaria (avatar del About)')
+    extra_image_dup = models.ImageField(upload_to='sections/', blank=True, null=True,
+                                        verbose_name='Imagen secundaria de la fila duplicada (About) — vacio = igual que la original')
     badge_text = models.CharField(max_length=255, default='', blank=True, verbose_name='Insignia / badge (About)')
+    badge_text_dup = models.CharField(max_length=255, default='', blank=True,
+                                      verbose_name='Insignia / badge de la fila duplicada (About) — vacio = igual que la original')
     person_text = models.CharField(max_length=255, default='', blank=True, verbose_name='Texto "Hi, This is..." (About)')
     checklist = models.TextField(default='', blank=True,
                                  verbose_name='Checklist (una linea por item, solo About)')
@@ -141,6 +162,12 @@ class SectionBlock(models.Model):
                                               verbose_name='Objetivo de animacion de la stat')
     stat_percent = models.CharField(max_length=20, default='3.85%', blank=True,
                                     verbose_name='Porcentaje de la stat (About)')
+    show_stat = models.BooleanField(default=True,
+                                    verbose_name='Mostrar stat flotante (About)')
+    show_learn_more = models.BooleanField(default=True,
+                                          verbose_name='Mostrar boton Learn More (About)')
+    show_play = models.BooleanField(default=True,
+                                    verbose_name='Mostrar boton play del video (About)')
     form_name_label = models.CharField(max_length=100, default='Name :', blank=True,
                                        verbose_name='Form placeholder Nombre (Contacto)')
     form_email_label = models.CharField(max_length=100, default='Email :', blank=True,
