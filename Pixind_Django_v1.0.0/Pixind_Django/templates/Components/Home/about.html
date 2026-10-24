@@ -3,7 +3,7 @@
     <div class="grid md:grid-cols-12 grid-cols-1 items-center gap-6">
         <div class="lg:col-span-6 md:col-span-6 md:order-1 order-2">
             <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">{{ sections.about.eyebrow }}</h6>
-            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">{{ sections.about.title_html|safe }}</h4>
+            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s"{% if sections.about.title_style %} style="{{ sections.about.title_style }}"{% endif %}>{{ sections.about.title_html|safe }}</h4>
             <p class="text-slate-400 max-w-xl wow animate__animated animate__fadeInUp" data-wow-delay=".6s">{{ sections.about.description }}</p>
 
             <div class="grid lg:grid-cols-2 grid-cols-1 mt-6 lg:gap-6 wow animate__animated animate__fadeInUp" data-wow-delay=".8s">

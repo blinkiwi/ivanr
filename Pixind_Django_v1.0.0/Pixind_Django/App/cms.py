@@ -2,6 +2,7 @@
 from django.urls import reverse
 
 from .models import (
+    HomeBlock,
     SiteConfig, StickyNav, NavItem, HeaderBlock, SectionBlock, FeatureBlock,
     ServiceTab, PricingBlock, FAQItem, ReviewItem, CounterItem, PartnerLogo,
     FooterColumn, FooterLink, SocialLink, FooterBlock, ContactInfo, Blog, Portfolio,
@@ -83,6 +84,9 @@ def build_blocks():
          "summary": f"{SectionBlock.objects.count()} secciones",
          "url": _list_url(SectionBlock), "count": SectionBlock.objects.count(),
          "is_list": True, "is_sections": True},
+        add_card("↕", "Orden de bloques (drag & drop)",
+                 "Arrastra las filas para mover los bloques del home",
+                 HomeBlock, f"{HomeBlock.objects.count()} bloques"),
         add_card("✦", "Features (cards)",
                  "Icono, título y texto de las tarjetas de features",
                  FeatureBlock, f"{FeatureBlock.objects.count()} tarjetas"),

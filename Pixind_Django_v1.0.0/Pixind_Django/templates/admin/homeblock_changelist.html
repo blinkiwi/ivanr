@@ -1,0 +1,114 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static %}
+
+{% block extrabody %}
+{{ block.super }}
+<style>
+  #result_list tbody tr:hover { cursor: grab; }
+  #result_list tbody tr:active { cursor: grabbing; }
+  #result_list tbody tr.rz-dragging { opacity: .35; }
+  .rz-move-btn { border: 1px solid #c8ccd4; background: #fff; color: #444; border-radius: 6px;
+                 padding: 1px 7px; cursor: pointer; line-height: 1.4; font-size: 11px; }
+  .rz-move-btn:hover { background: #f0f2f5; }
+  html[data-theme="dark"] .rz-move-btn { background: #1f2430; color: #cbd5e1; border-color: #3a4152; }
+</style>
+<script>
+(function () {
+  const table = document.querySelector('#result_list');
+  if (!table || !table.tBodies[0]) return;
+  const tbody = table.tBodies[0];
+
+  function pkDe(tr) {
+    const cb = tr.querySelector('input[name="_selected_action"]');
+    if (cb) return cb.value;
+    const a = tr.querySelector('a[href*="/change/"]');
+    const m = a && a.href.match(/\/(\d+)\/change\//);
+    return m ? m[1] : null;
+  }
+
+  let toast;
+  function aviso(ok) {
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.style.cssText = 'position:fixed;top:14px;right:14px;z-index:9999;padding:10px 16px;' +
+        'border-radius:10px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.25);transition:opacity .4s;opacity:0';
+      document.body.appendChild(toast);
+    }
+    toast.textContent = ok ? '✓ Orden guardado' : '⚠ No se pudo guardar el orden';
+    toast.style.background = ok ? '#4ec163' : '#e35d6a';
+    toast.style.color = '#fff';
+    toast.style.opacity = '1';
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { toast.style.opacity = '0'; }, 2200);
+  }
+
+  async function guardar() {
+    const ids = Array.prototype.map.call(tbody.rows, pkDe).filter(Boolean);
+    const csrf = (document.cookie.match(/(?:^|;\s*)csrftoken=([^;]+)/) || [])[1] || '';
+    try {
+      const r = await fetch("{% url 'admin:homeblock-reorder' %}", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrf },
+        body: JSON.stringify({ ids: ids })
+      });
+      const data = await r.json().catch(function () { return {}; });
+      const ok = r.ok && data.ok;
+      aviso(ok);
+      if (!ok) location.reload();
+    } catch (e) {
+      aviso(false);
+    }
+  }
+
+  /* botones subir/bajar: funcionan tambien en movil (sin drag nativo) */
+  Array.prototype.forEach.call(tbody.rows, function (tr) {
+    tr.draggable = true;
+    const celda = tr.cells[tr.cells.length - 1];
+    const wrap = document.createElement('span');
+    wrap.style.cssText = 'display:inline-flex;gap:4px;margin-left:10px;vertical-align:middle';
+    [['▲', -1], ['▼', 1]].forEach(function (cfg) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = cfg[0];
+      b.title = cfg[1] < 0 ? 'Subir bloque' : 'Bajar bloque';
+      b.className = 'rz-move-btn';
+      b.addEventListener('click', function (ev) {
+        ev.preventDefault(); ev.stopPropagation();
+        const other = cfg[1] < 0 ? tr.previousElementSibling : tr.nextElementSibling;
+        if (!other) return;
+        if (cfg[1] < 0) tbody.insertBefore(tr, other); else tbody.insertBefore(other, tr);
+        guardar();
+      });
+      wrap.appendChild(b);
+    });
+    celda.appendChild(wrap);
+  });
+
+  /* drag & drop nativo */
+  let dragRow = null;
+  tbody.addEventListener('dragstart', function (e) {
+    const tr = e.target.closest ? e.target.closest('tr') : null;
+    if (!tr) return;
+    dragRow = tr;
+    tr.classList.add('rz-dragging');
+    if (e.dataTransfer) { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', ''); }
+  });
+  tbody.addEventListener('dragover', function (e) {
+    if (!dragRow) return;
+    e.preventDefault();
+    const tr = e.target.closest ? e.target.closest('tr') : null;
+    if (!tr || tr === dragRow) return;
+    const r = tr.getBoundingClientRect();
+    const after = (e.clientY - r.top) > r.height / 2;
+    tbody.insertBefore(dragRow, after ? tr.nextSibling : tr);
+  });
+  tbody.addEventListener('dragend', function () {
+    if (!dragRow) return;
+    dragRow.classList.remove('rz-dragging');
+    dragRow = null;
+    guardar();
+  });
+  tbody.addEventListener('drop', function (e) { e.preventDefault(); });
+})();
+</script>
+{% endblock %}

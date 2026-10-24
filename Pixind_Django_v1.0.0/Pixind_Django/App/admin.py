@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import (
+    HomeBlock,
     SiteConfig, StickyNav, NavItem, HeaderBlock, SectionBlock, FeatureBlock,
     ServiceTab, PricingBlock, FAQItem, ReviewItem, CounterItem, PartnerLogo,
     FooterColumn, FooterLink, SocialLink, FooterBlock, ContactInfo, TeamBlock,
@@ -25,11 +26,35 @@ def _cms_home(request):
 _orig_get_urls = admin.AdminSite.get_urls
 
 
+def _reorder_homeblocks(request):
+    """POST {"ids":[...]} -> guarda el nuevo orden de los bloques del home."""
+    import json as _json
+    from django.http import JsonResponse
+    if request.method != "POST":
+        return JsonResponse({"ok": False, "error": "Se espera POST"}, status=405)
+    try:
+        ids = [int(i) for i in _json.loads(request.body.decode("utf-8")).get("ids", [])]
+    except Exception:
+        return JsonResponse({"ok": False, "error": "Payload invalido"}, status=400)
+    from .models import HomeBlock as _HB
+    validos = list(_HB.objects.values_list("id", flat=True))
+    ids = [i for i in ids if i in validos]
+    for pos, pk in enumerate(ids):
+        _HB.objects.filter(pk=pk).update(order=pos)
+    for pos, pk in enumerate(sorted(set(validos) - set(ids)), start=len(ids)):
+        _HB.objects.filter(pk=pk).update(order=pos)
+    return JsonResponse({"ok": True, "count": len(ids)})
+
+
 def _get_urls_with_cms(self):
     from django.contrib.admin.views.decorators import staff_member_required
     from django.urls import path as _path
 
-    return [_path("cms/", staff_member_required(_cms_home), name="cms-home")] + _orig_get_urls(self)
+    return [
+        _path("cms/", staff_member_required(_cms_home), name="cms-home"),
+        _path("homeblock/reorder/", staff_member_required(_reorder_homeblocks),
+              name="homeblock-reorder"),
+    ] + _orig_get_urls(self)
 
 
 admin.AdminSite.get_urls = _get_urls_with_cms
@@ -135,19 +160,31 @@ class SectionBlockAdmin(admin.ModelAdmin):
 
     def get_fieldsets(self, request, obj=None):
         """La personalizacion del titulo (tipografia/tamano/color) solo se muestra
-        en la seccion 5 (Partners), que es donde aplica."""
+        en las secciones donde aplica: 5 (Partners) y About."""
         fieldsets = super().get_fieldsets(request, obj)
-        if obj is None or obj.key != 'partners':
+        if obj is None or obj.key not in ('partners', 'about'):
             return fieldsets
         out = []
         for name, opts in fieldsets:
             if name == 'Cabecera (texto)':
                 opts = dict(opts)
                 opts['fields'] = tuple(opts['fields']) + ('title_font', 'title_size', 'title_color')
-                opts['description'] = ('Personaliza el titulo de la seccion 5 (Partners): '
+                opts['description'] = ('Personaliza el titulo de esta seccion (About / seccion 5 Partners): '
                                        'tipografia Waterfall, tamano y color. Vacio = estilo original.')
             out.append((name, opts))
         return tuple(out)
+
+
+@admin.register(HomeBlock)
+class HomeBlockAdmin(admin.ModelAdmin):
+    """Filas arrastrables: reordenan los bloques del home (drag & drop)."""
+    list_display = ('position', 'label', 'key')
+    ordering = ('order',)
+    change_list_template = 'admin/homeblock_changelist.html'
+
+    @admin.display(description='#', ordering='order')
+    def position(self, obj):
+        return obj.order + 1
 
 
 @admin.register(FeatureBlock)

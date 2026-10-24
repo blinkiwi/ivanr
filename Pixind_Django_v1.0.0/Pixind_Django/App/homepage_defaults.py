@@ -254,3 +254,21 @@ FOOTER_COLUMNS = [
         {'label': 'Contact us', 'url': '#'},
     ]},
 ]
+
+# Bloques del home en su orden POR DEFECTO (el panel los reordena con drag & drop)
+HOME_BLOCKS = [
+    ('hero', 'Hero (portada)'),
+    ('about', 'About'),
+    ('features', 'Features'),
+    ('why', '¿Por qué elegirnos? (Why choose us)'),
+    ('portfolio', 'Portfolio'),
+    ('partners', 'Partners'),
+    ('cta', 'C.T.A (banner)'),
+    ('pricing', 'Planes de precios'),
+    ('faqs', 'Preguntas frecuentes (FAQs)'),
+    ('reviews', 'Testimonios + contadores'),
+    ('blog', 'Blog'),
+    ('contact', 'Contacto'),
+    ('map', 'Mapa'),
+]
+BLOCK_TPL = {key: f'pages/blocks/{key}.html' for key, _ in HOME_BLOCKS}

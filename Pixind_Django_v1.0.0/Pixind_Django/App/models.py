@@ -446,3 +446,18 @@ class Portfolio(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class HomeBlock(models.Model):
+    """Orden de los bloques del home (arrastrar y soltar en el panel)."""
+    key = models.CharField(max_length=30, unique=True, verbose_name='Clave interna')
+    label = models.CharField(max_length=100, verbose_name='Nombre del bloque')
+    order = models.PositiveIntegerField(default=0, verbose_name='Posicion')
+
+    class Meta:
+        ordering = ('order', 'id')
+        verbose_name = 'Bloque del home (drag & drop)'
+        verbose_name_plural = 'Orden de los bloques del home (arrastra para mover)'
+
+    def __str__(self):
+        return f"{self.order + 1}. {self.label}"

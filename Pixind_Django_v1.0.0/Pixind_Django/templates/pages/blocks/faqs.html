@@ -1,0 +1,16 @@
+<section class="relative overflow-hidden md:py-24 py-16" id="faqs" style="padding-top:0">
+
+    <div class="container relative md:mt-24 mt-16">
+        <div class="grid grid-cols-1 pb-8 text-center">
+            <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">{{ sections.faqs.eyebrow }}</h6>
+            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">{{ sections.faqs.title_html|safe }}</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">{{ sections.faqs.description }}</p>
+        </div><!--end grid-->
+
+        <!-- Components/Home/faqs.html -->
+        {% include 'Components/Home/faqs.html' %}
+
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End -->

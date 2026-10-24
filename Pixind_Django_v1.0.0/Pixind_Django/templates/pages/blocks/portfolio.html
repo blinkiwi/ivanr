@@ -1,0 +1,27 @@
+<!-- Start -->
+<section class="relative overflow-hidden md:py-24 py-16" id="projects" style="padding-bottom:0">
+    <div class="container relative">
+        <div class="grid md:grid-cols-12 grid-cols-1 pb-8 items-end">
+            <div class="lg:col-span-8 md:col-span-6 md:text-start text-center">
+                <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">{{ sections.portfolio.eyebrow }}</h6>
+                <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">{{ sections.portfolio.title_html|safe }}</h4>
+                <p class="text-slate-400 max-w-xl wow animate__animated animate__fadeInUp" data-wow-delay=".6s">{{ sections.portfolio.description }}</p>
+            </div>
+
+            <div class="lg:col-span-4 md:col-span-6 md:text-end hidden md:block">
+                <a href="{{ sections.portfolio.button_url }}" class="group h-10 px-4 text-menu tracking-wider inline-flex items-center justify-center font-medium rounded-md bg-primary/10 hover:bg-primary text-primary hover:text-white">{{ sections.portfolio.button_label }} <i class="ri-arrow-right-up-line text-base ms-1 group-hover:rotate-45 duration-500"></i></a>
+            </div>
+        </div><!--end grid-->
+
+        <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 mt-6">
+                
+            <!-- Components/Home/portfolio.html -->
+            {% include 'Components/Home/portfolio.html' %}
+
+        </div><!--end grid-->
+
+        <div class="flex justify-center mx-auto mt-6 text-center md:hidden">
+            <a href="{{ sections.portfolio.button_url }}" class="group h-10 px-4 text-menu tracking-wider inline-flex items-center justify-center font-medium rounded-md bg-primary/10 hover:bg-primary text-primary hover:text-white">{{ sections.portfolio.button_label }} <i class="ri-arrow-right-up-line text-base ms-1 group-hover:rotate-45 duration-500"></i></a>
+        </div>
+    </div><!--end container-->
+</section><!--end section-->

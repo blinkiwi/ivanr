@@ -1,0 +1,18 @@
+<!-- Start -->
+<section class="relative overflow-hidden bg-slate-50 dark:bg-slate-800 md:pt-24 pt-16" id="contactus">
+    <div class="container relative">
+        <div class="grid grid-cols-1 pb-8 text-center">
+            <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">{{ sections.contactus.eyebrow }}</h6>
+                <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">{{ sections.contactus.title_html|safe }}</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">{{ sections.contactus.description }}</p>
+        </div><!--end grid-->
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 md:grid-cols-2 mt-6 items-center gap-6">
+                
+            <!-- Components/Home/contact-us.html -->
+            {% include 'Components/Home/contact-us.html' %}
+
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->

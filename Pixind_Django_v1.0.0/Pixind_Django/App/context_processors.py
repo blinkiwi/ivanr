@@ -8,6 +8,7 @@ from django.templatetags.static import static
 import re
 
 from .models import (
+    HomeBlock,
     SiteConfig, StickyNav, NavItem, HeaderBlock, SectionBlock, FeatureBlock,
     ServiceTab, PricingBlock, FAQItem, ReviewItem, CounterItem, PartnerLogo,
     FooterColumn, SocialLink, FooterBlock, ContactInfo, TeamBlock, Blog, Portfolio,
@@ -182,6 +183,13 @@ def global_context(request):
     sections = {key: _section_dict(key, section_objs.get(key)) for key in D.SECTIONS}
     load_waterfall = any(v.get('title_font') == 'waterfall' for v in sections.values())
 
+    # --- bloques del home en su orden (reordenable con drag & drop) --------
+    _labels = dict(D.HOME_BLOCKS)
+    _orden = [b.key for b in _rows(HomeBlock) if b.key in _labels]
+    _orden += [k for k in _labels if k not in _orden]
+    home_blocks = [{'key': k, 'label': _labels[k], 'tpl': D.BLOCK_TPL[k]}
+                   for k in _orden if k in D.BLOCK_TPL]
+
     # --- listas ------------------------------------------------------------
     feature_objs = _rows(FeatureBlock)
     if feature_objs:
@@ -318,6 +326,8 @@ def global_context(request):
         'hero': _hero_dict(hero_obj),
         # secciones
         'sections': sections,
+        # bloques del home en orden (drag & drop desde el panel)
+        'home_blocks': home_blocks,
         # tipografia Waterfall (solo se carga si alguna seccion la usa)
         'load_waterfall': load_waterfall,
         # listas del home

@@ -7,7 +7,7 @@ from django.core.management.base import BaseCommand
 from App.models import (
     SiteConfig, StickyNav, NavItem, HeaderBlock, SectionBlock, FeatureBlock,
     ServiceTab, PricingBlock, FAQItem, ReviewItem, CounterItem, PartnerLogo,
-    FooterColumn, FooterLink, SocialLink, FooterBlock, ContactInfo,
+    FooterColumn, FooterLink, SocialLink, FooterBlock, ContactInfo, HomeBlock,
 )
 from App import homepage_defaults as D
 
@@ -124,6 +124,12 @@ class Command(BaseCommand):
                     column=column, label=link['label'],
                     defaults={'url': link['url'], 'order': j})
                 created += 1 if link_created else 0
+
+        # Orden de los bloques del home (drag & drop)
+        for i, (key, label) in enumerate(D.HOME_BLOCKS):
+            _, was = HomeBlock.objects.get_or_create(
+                key=key, defaults={'label': label, 'order': i})
+            created += 1 if was else 0
 
         self.stdout.write(self.style.SUCCESS(
             f'Seed completado: {created} filas creadas (las existentes no se tocaron).'))

@@ -1,0 +1,18 @@
+<section class="relative overflow-hidden md:py-24 py-16" id="partners" style="padding-top:0">
+
+    <div class="container relative md:mt-24 mt-16">
+        <div class="grid grid-cols-1 pb-6 text-center">
+            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s"{% if sections.partners.title_style %} style="{{ sections.partners.title_style }}"{% endif %}>{{ sections.partners.title_html|safe }}</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">{{ sections.partners.description }}</p>
+        </div><!--end grid-->
+
+        <div class="grid lg:grid-cols-5 md:grid-cols-4 grid-cols-2 justify-center mt-6 gap-6">
+                
+            <!-- Components/Home/partners.html -->
+            {% include 'Components/Home/partners.html' %}
+        
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End -->
