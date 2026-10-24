@@ -1,0 +1,72 @@
+<!-- Start Navbar -->
+<nav id="topnav" class="defaultscroll is-sticky">
+    <div class="container relative">
+        <!-- Start Logo container-->
+        <a class="logo" href="{% url 'App:index' %}">
+            <span class="inline-block dark:hidden">
+                <img src="{% static 'app/images/logo-dark.png' %}" class="l-dark" alt="">
+                <img src="{% static 'app/images/logo-light.png' %}" class="l-light" alt="">
+            </span>
+            <img src="{% static 'app/images/logo-light.png' %}" class="hidden dark:inline-block" alt="">
+        </a>
+        <!-- End Logo container-->
+
+        <!-- Start Mobile Toggle -->
+        <div class="menu-extras">
+            <div class="menu-item">
+                <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+                    <div class="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <!-- End Mobile Toggle -->
+
+        <!--Login button Start-->
+        <ul class="buy-button list-none">
+            <li class="inline">
+                <a href="" class="group h-10 px-4 text-menu tracking-wider inline-flex items-center justify-center font-medium rounded-md bg-primary/10 hover:bg-primary text-primary hover:text-white">Get in Touch <i class="ri-arrow-right-up-line text-base ms-1 group-hover:rotate-45 duration-500"></i></a>
+            </li>
+        </ul>
+        <!--Login button End-->
+
+        <div id="navigation">
+            <!-- Navigation Menu-->   
+            <ul class="navigation-menu nav-light">
+                <li class="has-submenu parent-parent-menu-item">
+                    <a href="javascript:void(0)">Home</a><span class="menu-arrow"></span>
+
+                    <ul class="submenu">
+                        <li><a href="{% url 'App:index' %}" class="sub-menu-item">Index</a></li>
+                        <li><a href="{% url 'App:index_two' %}" class="sub-menu-item">Index Two</a></li>
+                        <li><a href="{% url 'App:index_three' %}" class="sub-menu-item">Index Three</a></li>
+                        <li><a href="{% url 'App:index_four' %}" class="sub-menu-item">Index Four</a></li>
+                        <li><a href="{% url 'App:index_five' %}" class="sub-menu-item">Index Five</a></li>
+                        <li><a href="{% url 'App:index_multi' %}" class="sub-menu-item">Index Multi</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="{% url 'App:aboutus' %}" class="sub-menu-item"> About Us</a></li>
+
+                <li><a href="{% url 'App:features' %}" class="sub-menu-item">Features</a></li>
+
+                <li class="has-submenu parent-parent-menu-item">
+                    <a href="javascript:void(0)">Pages</a><span class="menu-arrow"></span>
+
+                    <ul class="submenu">
+                        <li><a href="{% url 'App:blog' %}" class="sub-menu-item"> Blog</a></li>
+                        <li><a href="{% url 'App:portfolio' %}" class="sub-menu-item"> Portfolio</a></li>
+                        <li><a href="{% url 'App:pricing' %}" class="sub-menu-item"> Pricing</a></li>
+                        <li><a href="{% url 'App:team' %}" class="sub-menu-item"> Team</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="{% url 'App:contactus' %}" class="sub-menu-item">Contact Us</a></li>
+            </ul><!--end navigation menu-->
+        </div><!--end navigation-->
+    </div><!--end container-->
+</nav><!--end header-->
+<!-- End Navbar -->

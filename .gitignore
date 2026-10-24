@@ -1,0 +1,16 @@
+# Empaquetado y logs locales
+rizoivan.zip
+runserver.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.log
+
+# Entorno
+venv/
+node_modules/
+.env
+
+# Sistema
+.DS_Store

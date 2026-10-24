@@ -1,0 +1,15 @@
+{% for item in features %}
+    <div class="group p-6 rounded-md {{ item.class }} wow animate__animated animate__fadeInUp" data-wow-delay="{{ item.data }}">
+        <div class="flex align-middle justify-center items-center size-12 mt-1 bg-primary/5 dark:bg-primary/10 group-hover:bg-primary group-hover:text-white text-primary rounded-md text-xl shadow-sm shadow-gray-200 dark:shadow-gray-800 duration-500">
+            <i class="{{ item.icon }} text-3xl"></i>
+        </div>
+        <div class="flex-1 mt-4">
+            <h4 class="mb-0 text-lg font-semibold">{{ item.title }}</h4>
+            <p class="text-slate-400 mt-3">{{ item.desc }}</p>
+
+            <div class="mt-3">
+                <a href="{{ item.url }}" class="hover:text-primary inline-flex items-center">Read More <i class="ri-arrow-right-up-line text-base ms-1 group-hover:rotate-45 duration-500"></i></a>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,104 @@
+from App.models import Portfolio
+from django.utils.text import slugify
+
+# Define the portfolio data
+portfolios = [
+        {
+            'id' : 1,
+            'img' : '/static/app/images/portfolio/1.jpg', 
+            'title' : 'Mockup Collection',
+            'name' : 'Abstract',
+            'groups' : '["branding"]',
+            'data' : '.1s',
+        },
+        {
+            'id' : 2,
+            'img' : '/static/app/images/portfolio/2.jpg', 
+            'title' : 'Iphone mockup',
+            'name' : 'Abstract',
+            'groups' : '["designing"]',
+            'data' : '.2s',
+        },
+        {
+            'id' : 3,
+            'img' : '/static/app/images/portfolio/3.jpg', 
+            'title' : 'Abstract images',
+            'name' : 'Abstract',
+            'groups' : '["photography"]',
+            'data' : '.3s',
+        },
+        {
+            'id' : 4,
+            'img' : '/static/app/images/portfolio/4.jpg', 
+            'title' : 'Yellow bg with Books',
+            'name' : 'Abstract',
+            'groups' : '["development"]',
+            'data' : '.4s',
+        },
+        {
+            'id' : 5,
+            'img' : '/static/app/images/portfolio/5.jpg', 
+            'title' : 'Company V-card',
+            'name' : 'Abstract',
+            'groups' : '["branding"]',
+            'data' : '.5s',
+        },
+        {
+            'id' : 6,
+            'img' : '/static/app/images/portfolio/6.jpg', 
+            'title' : 'Coffee cup',
+            'name' : 'Abstract',
+            'groups' : '["branding"]',
+            'data' : '.6s',
+        },
+        {
+            'id' : 7,
+            'img' : '/static/app/images/portfolio/7.jpg', 
+            'title' : 'Deep Sea Phantasy',
+            'name' : 'Abstract',
+            'groups' : '["development"]',
+            'data' : '.7s',
+        },
+        {
+            'id' : 8,
+            'img' : '/static/app/images/portfolio/8.jpg', 
+            'title' : 'Color Abstract Painting',
+            'name' : 'Abstract',
+            'groups' : '["branding"]',
+            'data' : '.8s',
+        },
+        {
+            'id' : 9,
+            'img' : '/static/app/images/portfolio/9.jpg', 
+            'title' : 'Liquid Forest Princess',
+            'name' : 'Abstract',
+            'groups' : '["branding"]',
+            'data' : '.9s',
+        }
+    ]
+
+# Loop through the data and create portfolio entries
+for portfolio in portfolios:
+    new_portfolio = Portfolio.objects.create(
+        id=portfolio['id'],
+        title=portfolio['title'],
+        img=portfolio['img'],
+    )
+    
+    new_portfolio.slug = slugify(new_portfolio.title)
+    new_portfolio.save()
+----------------------------------------------
+#check portfolio data
+-----------------------------------------------
+from App.models import Portfolio
+
+portfolios = Portfolio.objects.all()
+for portfolio in portfolios:
+    print(portfolio.title, portfolio.img, portfolio.slug)
+
+-------------------------------------------------
+#delete portfolio data
+-------------------------------------------------
+from App.models import Portfolio
+
+Portfolio.objects.all().delete()

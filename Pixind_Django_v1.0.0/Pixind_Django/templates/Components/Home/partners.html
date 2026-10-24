@@ -1,0 +1,5 @@
+{% for item in partners %}
+    <div class="group flex w-full justify-center py-4 px-2 bg-slate-50/50 hover:bg-white dark:bg-slate-800/20 dark:hover:bg-slate-900 rounded-xl duration-500 shadow-sm shadow-gray-200 dark:shadow-gray-800 wow animate__animated animate__fadeInUp" data-wow-delay="{{ item.data }}">
+        <img src="{{ item.img }}" class="h-12 grayscale group-hover:grayscale-0 duration-500" alt="">
+    </div>
+{% endfor %}

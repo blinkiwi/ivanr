@@ -1,0 +1,28 @@
+{% for item in reviews %}
+    <div class="tiny-slide">
+        <div class="relative overflow-hidden p-6">
+            <ul class="list-none text-amber-400 mb-3">
+                <li class="inline"><i class="ri-star-fill"></i></li>
+                <li class="inline"><i class="ri-star-fill"></i></li>
+                <li class="inline"><i class="ri-star-fill"></i></li>
+                <li class="inline"><i class="ri-star-fill"></i></li>
+                <li class="inline"><i class="ri-star-fill"></i></li>
+            </ul>
+
+            <p class="text-slate-400">{{ item.desc }}</p>
+            
+            <div class="flex items-center mt-6 pt-6 border-t border-slate-100 dark:border-slate-700">
+                <img src="{{ item.img }}" class="size-14 rounded-full shadow-sm shadow-gray-200 dark:shadow-gray-800" alt="">
+
+                <div class="ps-4">
+                    <a href="" class="text-lg hover:text-primary duration-500 ease-in-out">{{ item.name }}</a>
+                    <p class="text-slate-400">{{ item.title }}</p>
+                </div>
+            </div>
+            
+            <div class="absolute -bottom-4 md:-inset-e-0 -inset-e-0">
+                <i class="ri-double-quotes-r opacity-5 text-8xl"></i>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -1,0 +1,251 @@
+{% extends "Base/base.html" %}
+
+{% block hero_content %}
+
+{% include 'Base/navbar.html' %}
+
+<!-- Hero Start -->
+<section class="relative md:h-screen flex items-center py-36 bg-center bg-no-repeat bg-cover jarallax" data-jarallax data-speed="0.5" id="home" style="background-image:url('{% if hero.image %}{{ hero.image }}{% else %}{% static 'app/images/bg/2.jpg' %}{% endif %}')">
+    <div class="absolute inset-0 bg-slate-900/60"></div>
+    <div class="container relative md:mt-16 z-10">
+        <div class="grid md:grid-cols-12 grid-cols-1 items-center gap-6">
+            <div class="lg:col-span-8 md:col-span-7">
+                <h1 class="font-bold text-white lg:leading-tight leading-tight text-4xl lg:text-6xl md:text-5xl mb-5 wow animate__animated animate__fadeInUp" data-wow-delay=".4s">{{ hero.title }}{% if hero.title_line2 %} <br> {{ hero.title_line2 }}{% endif %}</h1>
+                <p class="text-white/70 text-lg max-w-xl wow animate__animated animate__fadeInUp" data-wow-delay=".6s">{{ hero.subtitle }}</p>
+                
+                <div class="mt-6 wow animate__animated animate__fadeInUp" data-wow-delay=".8s">
+                    <a href="{{ hero.button_link }}" class="group h-11 px-6 tracking-wider inline-flex items-center text-sm justify-center font-bold rounded-md bg-white text-primary me-1">{{ hero.button_text }} <i class="ri-arrow-right-up-line align-middle group-hover:rotate-45 duration-500 ms-1"></i></a>
+                    <a href="#!" data-type="youtube" data-id="{{ hero.video_id }}" class="size-10 inline-flex items-center justify-center text-base rounded-full bg-primary text-white lightbox"><i class="ri-play-fill"></i></a><span class="font-semibold ms-1 text-white/70 align-middle">{{ hero.video_label }}</span>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-4 md:col-span-5">
+                <div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm shadow-gray-200 dark:shadow-gray-800 p-6 relative wow animate__animated animate__zoomIn" data-wow-delay=".2s">
+                    <h4 class="mb-5 text-2xl font-semibold">{{ hero.card_title|linebreaksbr }}</h4>
+
+                    <form>
+                        <div class="grid grid-cols-1 gap-4">
+                            <div class="">
+                                <label class="form-label font-medium">{{ hero.card_name_label }}</label>
+                                <input type="text" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none mt-2" placeholder="Name" name="name" required>
+                            </div>
+
+                            <div class="">
+                                <label class="form-label font-medium">{{ hero.card_email_label }}</label>
+                                <input type="email" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none mt-2" placeholder="Email" name="email" required>
+                            </div>
+
+                            <div class="">
+                                <label class="form-label font-medium">{{ hero.card_phone_label }}</label>
+                                <input name="number" id="phNumber" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none mt-2" placeholder="+12 12458 854" required>
+                            </div>
+                            
+                            <div>
+                                <a href="{{ hero.button_link }}" class="group h-10 px-4 text-menu tracking-wider inline-flex items-center justify-center font-medium rounded-md bg-primary text-white">{{ hero.card_button_text }}</a>
+                            </div>
+                        </div><!--end grid-->
+                    </form>
+                    <!-- end form -->
+                </div>
+            </div>
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+<!-- Hero End -->
+
+<!-- Start -->
+<section class="relative overflow-hidden md:py-24 py-16" id="aboutus">
+        
+    <!-- Components/Home/about.html -->
+    {% include 'Components/Home/about.html' %}
+
+</section><!--end section-->
+<!-- End -->
+
+<!-- Start -->
+<section class="relative overflow-hidden bg-slate-50 dark:bg-slate-800 md:py-24 py-16" id="features">
+    <div class="container relative">
+        <div class="grid grid-cols-1 pb-6 text-center">
+            <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">{{ sections.features.eyebrow }}</h6>
+            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">{{ sections.features.title_html|safe }}</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">{{ sections.features.description }}</p>
+        </div><!--end grid-->
+
+        <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 mt-6 gap-6 items-center">
+                
+            <!-- Components/Home/features.html -->
+            {% include 'Components/Home/features.html' %}
+
+        </div><!--end grid-->
+    </div><!--end container-->
+
+    <div class="container relative md:mt-24 mt-16">
+        <div class="grid md:grid-cols-12 grid-cols-1 gap-6">
+                
+            <!-- Components/Home/choose-us.html -->
+            {% include 'Components/Home/choose-us.html' %}
+
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End -->
+
+<!-- Start -->
+<section class="relative overflow-hidden md:py-24 py-16" id="projects">
+    <div class="container relative">
+        <div class="grid md:grid-cols-12 grid-cols-1 pb-8 items-end">
+            <div class="lg:col-span-8 md:col-span-6 md:text-start text-center">
+                <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">{{ sections.portfolio.eyebrow }}</h6>
+                <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">{{ sections.portfolio.title_html|safe }}</h4>
+                <p class="text-slate-400 max-w-xl wow animate__animated animate__fadeInUp" data-wow-delay=".6s">{{ sections.portfolio.description }}</p>
+            </div>
+
+            <div class="lg:col-span-4 md:col-span-6 md:text-end hidden md:block">
+                <a href="{{ sections.portfolio.button_url }}" class="group h-10 px-4 text-menu tracking-wider inline-flex items-center justify-center font-medium rounded-md bg-primary/10 hover:bg-primary text-primary hover:text-white">{{ sections.portfolio.button_label }} <i class="ri-arrow-right-up-line text-base ms-1 group-hover:rotate-45 duration-500"></i></a>
+            </div>
+        </div><!--end grid-->
+
+        <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-6 mt-6">
+                
+            <!-- Components/Home/portfolio.html -->
+            {% include 'Components/Home/portfolio.html' %}
+
+        </div><!--end grid-->
+
+        <div class="flex justify-center mx-auto mt-6 text-center md:hidden">
+            <a href="{{ sections.portfolio.button_url }}" class="group h-10 px-4 text-menu tracking-wider inline-flex items-center justify-center font-medium rounded-md bg-primary/10 hover:bg-primary text-primary hover:text-white">{{ sections.portfolio.button_label }} <i class="ri-arrow-right-up-line text-base ms-1 group-hover:rotate-45 duration-500"></i></a>
+        </div>
+    </div><!--end container-->
+
+    <div class="container relative md:mt-24 mt-16">
+        <div class="grid grid-cols-1 pb-6 text-center">
+            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">{{ sections.partners.title_html|safe }}</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">{{ sections.partners.description }}</p>
+        </div><!--end grid-->
+
+        <div class="grid lg:grid-cols-5 md:grid-cols-4 grid-cols-2 justify-center mt-6 gap-6">
+                
+            <!-- Components/Home/partners.html -->
+            {% include 'Components/Home/partners.html' %}
+        
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End -->
+
+<!-- Start -->
+<section class="py-24 w-full table relative overflow-hidden bg-center bg-cover jarallax" data-jarallax data-speed="0.5" style="background-image:url('{% if sections.cta.background_image %}{{ sections.cta.background_image }}{% else %}{% static 'app/images/bg/cta.jpg' %}{% endif %}')">
+        
+    <!-- Components/Home/cta.html -->
+    {% include 'Components/Home/cta.html' %}
+
+</section><!--end section-->
+<!-- End -->
+
+<!-- Start -->
+<section class="relative overflow-hidden md:py-24 py-16" id="pricing">
+    <div class="container relative">
+        <div class="grid lg:grid-cols-12 grid-cols-1 items-center gap-6">
+                
+            <!-- Components/Home/pricing.html -->
+            {% include 'Components/Home/pricing.html' %}
+
+        </div><!--end grid-->
+    </div><!--end container-->
+
+    <div class="container relative md:mt-24 mt-16">
+        <div class="grid grid-cols-1 pb-8 text-center">
+            <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">{{ sections.faqs.eyebrow }}</h6>
+            <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">{{ sections.faqs.title_html|safe }}</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">{{ sections.faqs.description }}</p>
+        </div><!--end grid-->
+
+        <!-- Components/Home/faqs.html -->
+        {% include 'Components/Home/faqs.html' %}
+
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End -->
+
+<!-- Start -->
+<section class="relative overflow-hidden bg-slate-50 dark:bg-slate-800 md:py-24 py-16" id="reviews">
+    <div class="container relative">
+        <div class="grid lg:grid-cols-12 grid-cols-1 items-center gap-6">
+            <div class="lg:col-span-6 lg:text-start text-center lg:pb-0 pb-6">
+                <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">{{ sections.reviews.eyebrow }}</h6>
+                <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">{{ sections.reviews.title_html|safe }}</h4>
+                <p class="text-slate-400 max-w-xl lg:ms-auto mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">{{ sections.reviews.description }}</p>
+            </div>
+
+            <div class="lg:col-span-6 lg:ms-6 lg:mt-0 mt-6">
+                <div class="tiny-single-item wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
+                        
+                    <!-- Components/Home/reviews.html -->
+                    {% include 'Components/Home/reviews.html' %}
+
+                </div>
+            </div>
+        </div><!--end grid-->
+
+        <div class="grid lg:grid-cols-12 grid-cols-1 md:text-start mt-10 justify-center">
+            <div class="lg:col-start-2 lg:col-span-10">
+                <div class="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 items-center gap-6 ">
+                        
+                    <!-- Components/Home/counter.html -->
+                    {% include 'Components/Home/counter.html' %}
+                
+                </div>
+            </div>
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End -->
+
+<!-- Start -->
+<section class="relative overflow-hidden md:py-24 py-16" id="blogs">
+    <div class="container relative">
+        <div class="grid grid-cols-1 pb-8 text-center">
+            <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">{{ sections.blogs.eyebrow }}</h6>
+                <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">{{ sections.blogs.title_html|safe }}</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">{{ sections.blogs.description }}</p>
+        </div><!--end grid-->
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 mt-6 gap-6">
+                
+            <!-- Components/Home/blog.html -->
+            {% include 'Components/Home/blog.html' %}
+
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End -->
+
+<!-- Start -->
+<section class="relative overflow-hidden bg-slate-50 dark:bg-slate-800 md:pt-24 pt-16" id="contactus">
+    <div class="container relative">
+        <div class="grid grid-cols-1 pb-8 text-center">
+            <h6 class="text-primary uppercase text-sm font-bold tracking-wider mb-3 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">{{ sections.contactus.eyebrow }}</h6>
+                <h4 class="mb-4 text-[32px] md:leading-normal leading-normal font-bold wow animate__animated animate__fadeInUp" data-wow-delay=".4s">{{ sections.contactus.title_html|safe }}</h4>
+
+            <p class="text-slate-400 max-w-xl mx-auto wow animate__animated animate__fadeInUp" data-wow-delay=".6s">{{ sections.contactus.description }}</p>
+        </div><!--end grid-->
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 md:grid-cols-2 mt-6 items-center gap-6">
+                
+            <!-- Components/Home/contact-us.html -->
+            {% include 'Components/Home/contact-us.html' %}
+
+        </div><!--end grid-->
+    </div><!--end container-->
+        
+    <!-- Components/Home/map.html -->
+    {% include 'Components/Home/map.html' %}
+
+</section><!--end section-->
+<!-- End -->
+
+{% endblock %}

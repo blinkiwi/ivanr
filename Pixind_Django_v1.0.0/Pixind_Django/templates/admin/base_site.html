@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" href="{% static 'admin_custom/admin.css' %}?v={{ admin_assets_version }}">
+{% endblock %}
+
+{% block extrahead %}{{ block.super }}
+{% if favicon %}<link rel="shortcut icon" href="{{ favicon.url }}">{% endif %}
+<script src="{% static 'admin_custom/admin.js' %}?v={{ admin_assets_version }}" defer></script>
+{% endblock %}
+
+{% block responsive %}{{ block.super }}
+<link rel="stylesheet" href="{% static 'admin_custom/admin-mobile.css' %}?v={{ admin_assets_version }}">
+{% endblock %}
+
+{% block branding %}
+<a class="brand" href="{% url 'admin:index' %}">
+    <span class="brand-mark">{% if logo %}<img src="{{ logo.url }}" alt="">{% else %}R{% endif %}</span>
+    <span class="brand-text">
+        <strong>{{ site_header|default:_('Django administration') }}</strong>
+        <small>{{ site_title|default:_('Site administration') }}</small>
+    </span>
+</a>
+{% endblock %}
+
+{% block nav-global %}
+<a class="view-site" href="/" target="_blank" rel="noopener">{% translate 'View site' %} ↗</a>
+{% endblock %}

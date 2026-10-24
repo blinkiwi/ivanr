@@ -1,0 +1,253 @@
+/* ==========================================================================
+   Rizoivan CMS — responsive del admin (<= 1024 / <= 767)
+   Se carga DESPUÉS de responsive.css, así que pisa sus reglas.
+   ========================================================================== */
+
+/* ------------------------------------------------------------ 481–1024 px */
+@media (max-width: 1024px) {
+    #header {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+    }
+
+    #user-tools {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 2px;
+        margin-inline-start: auto;
+        line-height: 1.4;
+        max-width: 100%;
+    }
+
+    #user-tools a, #logout-form button { font-size: 12.5px; padding: 6px 10px; }
+
+    .breadcrumbs { top: auto; position: static; padding: 8px 16px; }
+
+    #changelist thead th { top: 0; }
+
+    .content { padding: 16px 16px 60px; }
+
+    .aligned label { flex: 0 0 210px; }
+
+    /* el contenido debe poder encoger junto al sidebar (evita desbordes a 768) */
+    .main > .content, #content, #content-main, #content > div { min-width: 0; max-width: 100%; }
+    .object-tools { flex-wrap: wrap; justify-content: flex-start; }
+    .object-tools a { white-space: normal; text-align: center; }
+    #content h1 { overflow-wrap: anywhere; }
+}
+
+/* el panel de filtros baja debajo de la tabla cuando no hay ancho suficiente
+   (así la lista se despliega con todas sus columnas a la vista) */
+@media (max-width: 1500px) {
+    #changelist .changelist-form-container { flex-direction: column; }
+    #changelist .changelist-form-container > * { width: 100% !important; max-width: 100% !important; }
+    /* Django reserva 270px para el filtro aunque esté debajo: lo anulamos */
+    .filtered .changelist-form-container > div { max-width: 100% !important; }
+    #changelist-filter { width: 100% !important; margin-left: 0; }
+}
+
+/* ------------------------------------------- cajón lateral (<= 1024 px) --- */
+@media (max-width: 1024px) {
+    /* el sidebar deja de ocupar ancho y pasa a cajón: la lista gana toda la
+       anchura disponible y todas sus columnas quedan a la vista */
+    #nav-sidebar { display: block !important; }
+
+    .main > #nav-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 80;
+        width: min(300px, 84vw);
+        height: 100dvh;
+        max-height: none;
+        margin-left: 0;
+        padding-top: 20px;
+        transform: translateX(-102%);
+        transition: transform .22s ease;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        box-shadow: 18px 0 44px -30px rgba(0, 0, 0, .7);
+        border-right: 1px solid var(--hairline-color);
+        background: var(--surface);
+    }
+
+    #nav-filter { margin-top: 0; }
+
+    .main.shifted > #nav-sidebar { left: 0; transform: none; }
+
+    .main > #nav-sidebar + .content,
+    .main.shifted > #nav-sidebar + .content {
+        margin-left: 0;
+        max-width: 100%;
+    }
+
+    /* botón hamburguesa flotante */
+    #toggle-nav-sidebar {
+        display: flex !important;
+        position: fixed;
+        left: 14px;
+        bottom: 18px;
+        z-index: 90;
+        width: 52px;
+        height: 52px;
+        flex: 0 0 52px;
+        border: 1px solid var(--hairline-color);
+        border-radius: 999px;
+        background: var(--brand-grad);
+        color: #fff;
+        box-shadow: 0 16px 34px -18px rgba(99, 102, 241, .95);
+        font-size: 1.1rem;
+    }
+    #toggle-nav-sidebar::before { content: "☰"; color: #fff; }
+    #toggle-nav-sidebar:hover, #toggle-nav-sidebar:focus { background: var(--brand-grad); color: #fff; }
+
+    /* scrim al abrir el cajón */
+    .main.shifted::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 70;
+        background: rgba(8, 12, 28, .55);
+        backdrop-filter: blur(2px);
+    }
+
+    /* el panel de filtros baja debajo de la tabla: la lista gana toda el ancho */
+}
+
+/* ------------------------------------------------------------- <= 767 px */
+@media (max-width: 767px) {
+    /* header compacto */
+    #header { padding: 10px 14px; }
+    #user-tools { width: 100%; justify-content: space-between; font-size: 12.5px; }
+    #welcome-msg { display: none; }
+    #user-tools a, #logout-form button { padding: 7px 9px; }
+    .view-site { padding: 7px 13px; font-size: 12.5px; }
+    .brand-text strong { font-size: 14px; }
+
+    /* dashboard: tarjetas KPI en 2 columnas y listas apiladas */
+    .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .kpi-card { padding: 12px; }
+    .kpi-count { font-size: 19px; }
+    .admin-hero { padding: 16px; }
+    .admin-hero h2 { font-size: 21px; }
+    .admin-hero-actions { width: 100%; }
+    .admin-hero-actions .btn { flex: 1 1 auto; justify-content: center; }
+
+    /* la tabla de modelos se apila en tarjetas (evita 650px de ancho) */
+    .app-list .module table,
+    .app-list .module tbody,
+    .app-list .module tr,
+    .app-list .module th,
+    .app-list .module td { display: block; width: auto; }
+    .app-list .module tr {
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--line-2);
+        border-radius: 12px;
+    }
+    .app-list .module tr:hover { background: var(--selected-bg); }
+    .app-list .module th[scope="row"] { padding: 0 0 8px !important; font-size: 14px; }
+    .app-list td { text-align: left !important; padding: 0 !important; border: 0 !important; }
+    .app-list td a { display: inline-block; margin: 0 8px 6px 0; padding: 8px 14px; min-height: 34px; }
+    .app-list .module caption { padding: 14px 14px 6px; }
+
+}
+
+/* --------------------------------------------- listas apiladas (<= 1024) */
+@media (max-width: 1024px) {
+    /* listas: cada fila se apila como tarjeta con etiqueta, de arriba hacia abajo */
+    #changelist .results { overflow-x: visible; }
+    #changelist table,
+    #changelist thead,
+    #changelist tbody,
+    #changelist tr,
+    #changelist th,
+    #changelist td { display: block; width: 100%; }
+    #changelist table { min-width: 0; }
+    #changelist thead { display: none; }
+    #changelist tbody tr {
+        padding: 10px 13px;
+        margin-bottom: 10px;
+        border: 1px solid var(--hairline-color);
+        border-radius: 14px;
+        background: var(--surface);
+        box-shadow: var(--shadow-sm);
+    }
+    #changelist tbody tr:hover { border-color: color-mix(in srgb, var(--primary) 35%, var(--line)); }
+    #changelist tbody td,
+    #changelist tbody th {
+        display: block;
+        padding: 9px 0;
+        border-bottom: 1px dashed var(--line-2);
+        border-top: 0;
+        text-align: left !important;
+    }
+    #changelist tbody td:last-child,
+    #changelist tbody th:last-child { border-bottom: 0; }
+    #changelist tbody td::before,
+    #changelist tbody th::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 5px;
+        color: var(--fg-3);
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: .07em;
+        text-transform: uppercase;
+    }
+    #changelist tbody td:not([data-label])::before,
+    #changelist tbody th:not([data-label])::before { content: none; margin-bottom: 0; }
+    #changelist tbody td > input[type="text"],
+    #changelist tbody td > input[type="number"],
+    #changelist tbody td > select,
+    #changelist tbody td > a,
+    #changelist tbody th > a { display: block; width: 100%; min-width: 0; box-sizing: border-box; overflow-wrap: anywhere; }
+    #changelist tbody td > input[type="text"],
+    #changelist tbody td > input[type="number"],
+    #changelist tbody td > select { min-height: 44px; font-size: 15px; }
+}
+
+/* ------------------------------------------------------------- <= 767 px */
+@media (max-width: 767px) {
+    /* acciones y filtros a ancho completo */
+    .main > .content, .content, #content, #content > div, #content-main { min-width: 0; max-width: 100%; }
+    .actions { flex-direction: column; align-items: stretch; }
+    .actions, .actions > * { box-sizing: border-box; max-width: 100%; }
+    .actions select, .actions label, .actions .button, .actions span { width: 100%; flex: 1 1 auto; }
+    #changelist-search input[type="text"] { min-width: 0; width: 100%; box-sizing: border-box; }
+    #changelist .flex-container { flex-direction: column; }
+    #changelist .flex-container #changelist-filter { flex-basis: auto; width: 100%; }
+    #toolbar, .toplinks, #changelist-search { max-width: 100%; box-sizing: border-box; }
+
+    /* formulario: etiquetas y campos apilados, campos táctiles cómodos */
+    .aligned label { flex: 1 1 100%; padding-top: 0; margin-bottom: 6px; }
+    .aligned .form-row { flex-direction: column; gap: 6px; padding: 12px 0; }
+    .aligned .form-row > div { width: 100%; max-width: 100%; }
+    input[type="text"], input[type="number"], input[type="url"], input[type="email"],
+    input[type="password"], textarea, select { width: 100%; padding: 12px; font-size: 16px; }
+    input[type="checkbox"], input[type="radio"] { width: 20px; height: 20px; }
+    .submit-row { position: sticky; bottom: 0; background: var(--bg); padding: 12px 0 16px; z-index: 6; flex-wrap: wrap; }
+    .submit-row input, .submit-row a.button, .submit-row a.deletelink {
+        width: 100%; box-sizing: border-box; flex: 1 1 100%; padding: 14px 16px; text-align: center;
+    }
+    .object-tools { justify-content: flex-start; }
+    .object-tools a { padding: 10px 15px; }
+
+    /* paginación y mensajes cómodos al tacto */
+    .paginator a, .paginator .this-page { min-width: 38px; height: 38px; }
+    ul.messagelist li { padding: 13px 15px 13px 44px; }
+
+    #footer { padding: 16px 16px 80px; }
+}
+
+/* pantallas muy estrechas */
+@media (max-width: 360px) {
+    .kpi-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 420px) {
+    .brand-text small { display: none; }
+}

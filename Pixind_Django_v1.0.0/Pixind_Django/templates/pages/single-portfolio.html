@@ -1,0 +1,155 @@
+{% extends "Base/base.html" %}
+
+{% block hero_content %}
+
+{% include 'Base/navbar2.html' %}
+
+<!-- Start Hero -->
+<section class="relative table w-full py-24 bg-no-repeat bg-center bg-cover" style="background-image:url('{% static 'app/images/bg/4.jpg' %}')">
+    <div class="absolute inset-0 bg-slate-900/60"></div>
+    <div class="container relative">
+        <div class="grid grid-cols-1 text-center mt-10">
+            <h1 class="font-bold text-white lg:leading-tight leading-tight text-3xl wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
+                {% if portfolio.title %}
+                    {{ portfolio.title }}
+                {% else %}
+                    Mockup Collection
+                {% endif %}
+            </h1>
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+</section><!--end section-->
+<!-- End Hero -->
+
+<!-- Start -->
+<section class="relative lg:py-24 py-16">
+    <div class="container relative">
+        <div class="grid md:grid-cols-12 grid-cols-1 gap-6">
+            <div class="md:col-span-12 md:order-1 order-1 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
+                <h5 class="text-2xl font-semibold">
+                    {% if portfolio.title %}
+                        {{ portfolio.title }}
+                    {% else %}
+                        Mockup Collection
+                    {% endif %}
+                </h5>
+                <p class="text-slate-400 mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit totam atque dignissimos porro, exercitationem, neque alias ea aliquid quibusdam voluptates impedit maxime aut asperiores consequatur iste. Corporis fuga ducimus dignissimos. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci non dolorem consequatur vitae hic.</p>
+            </div><!--end grid-->
+
+            <div class="lg:col-span-8 md:col-span-7 md:order-2 order-3">
+                <div class="relative md:shrink-0 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
+                    <img class="object-cover w-full h-96 rounded-lg shadow-sm shadow-slate-100 dark:shadow-slate-800" src="
+                        {% if portfolio.img %}
+                            {{ portfolio.img }}
+                        {% else %}
+                            {% static 'app/images/portfolio/1.jpg' %}
+                        {% endif %}
+                    " alt="">
+                </div>
+
+                <h5 class="text-xl font-semibold mt-6 wow animate__animated animate__fadeInUp" data-wow-delay=".3s">Overview</h5>
+
+                <p class="text-slate-400 mt-4 wow animate__animated animate__fadeInUp" data-wow-delay=".4s">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit totam atque dignissimos porro, exercitationem, neque alias ea aliquid quibusdam voluptates impedit maxime aut asperiores consequatur iste. Corporis fuga ducimus dignissimos. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci non dolorem consequatur vitae hic.</p>
+                <p class="text-slate-400 mt-2 wow animate__animated animate__fadeInUp" data-wow-delay=".5s">Suscipit totam atque dignissimos porro, exercitationem, neque alias ea aliquid quibusdam voluptates impedit maxime aut asperiores consequatur iste. Corporis fuga ducimus dignissimos.</p>
+
+                <div class="grid md:grid-cols-2 grid-cols-1 gap-6 mt-6">
+                    <div class="group relative overflow-hidden shadow-sm shadow-slate-100 dark:shadow-slate-800 rounded-md wow animate__animated animate__fadeInUp" data-wow-delay=".6s">
+                        <div class="relative md:shrink-0">
+                            <a href="{% static 'app/images/portfolio/1.jpg' %}" class="lightbox">
+                                <img class="object-cover md:w-96 w-full h-80 group-hover:scale-110 duration-500" src="{% static 'app/images/portfolio/1.jpg' %}" alt="">
+                            </a>
+                        </div>
+
+                        <div class="p-4 absolute inset-s-0 -bottom-10 group-hover:bottom-0 duration-500 opacity-0 group-hover:opacity-100">
+                            <div class="bg-white dark:bg-slate-900 py-2 px-4 w-fit rounded-md">
+                                <p class="text-slate-400 text-sm">Motion Graphics</p>
+                            </div>
+
+                            <div class="bg-white dark:bg-slate-900 py-2 px-4 w-fit rounded-md mt-1">
+                                <a href="" class="text-md font-semibold hover:text-primary">Brand Identity Campaign</a>
+                            </div>
+                        </div>
+                    </div><!--end content-->
+                    
+                    <div class="group relative overflow-hidden shadow-sm shadow-slate-100 dark:shadow-slate-800 rounded-md wow animate__animated animate__fadeInUp" data-wow-delay=".7s">
+                        <div class="relative md:shrink-0">
+                            <a href="{% static 'app/images/portfolio/2.jpg' %}" class="lightbox">
+                                <img class="object-cover md:w-96 w-full h-80 group-hover:scale-110 duration-500" src="{% static 'app/images/portfolio/2.jpg' %}" alt="">
+                            </a>
+                        </div>
+
+                        <div class="p-4 absolute inset-s-0 -bottom-10 group-hover:bottom-0 duration-500 opacity-0 group-hover:opacity-100">
+                            <div class="bg-white dark:bg-slate-900 py-2 px-4 w-fit rounded-md">
+                                <p class="text-slate-400 text-sm">Motion Graphics</p>
+                            </div>
+
+                            <div class="bg-white dark:bg-slate-900 py-2 px-4 w-fit rounded-md mt-1">
+                                <a href="" class="text-md font-semibold hover:text-primary">Typeface & Texture</a>
+                            </div>
+                        </div>
+                    </div><!--end content-->
+                </div><!--end grid-->
+
+                <h5 class="text-xl font-semibold mt-6 wow animate__animated animate__fadeInUp" data-wow-delay=".8s">Conclusion</h5>
+
+                <p class="text-slate-400 mt-4 wow animate__animated animate__fadeInUp" data-wow-delay=".9s">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit totam atque dignissimos porro, exercitationem, neque alias ea aliquid quibusdam voluptates impedit maxime aut asperiores consequatur iste. Corporis fuga ducimus dignissimos. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci non dolorem consequatur vitae hic.</p>
+                <p class="text-slate-400 mt-2 wow animate__animated animate__fadeInUp" data-wow-delay="1s">Suscipit totam atque dignissimos porro, exercitationem, neque alias ea aliquid quibusdam voluptates impedit maxime aut asperiores consequatur iste. Corporis fuga ducimus dignissimos.</p>
+            </div><!--end col-->
+
+            <div class="lg:col-span-4 md:col-span-5 md:order-3 order-2">
+                <div class="sticky top-20 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
+                    <h5 class="text-xl font-semibold">Project Detail</h5>
+
+                    <div class="flex items-center mt-6">
+                        <div class="w-5/12">
+                            <h6 class="font-medium"><i class="ri-user-line font-medium me-1"></i>Client :</h6>
+                        </div>
+                        <div class="w-7/12">
+                            <p class="text-slate-400 text-sm mt-1">Calvin Carlo</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center mt-2">
+                        <div class="w-5/12">
+                            <h6 class="font-medium"><i class="ri-calendar-line font-medium me-1"></i>Date :</h6>
+                        </div>
+                        <div class="w-7/12">
+                            <p class="text-slate-400 text-sm mt-1">10th January 2027</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center mt-2">
+                        <div class="w-5/12">
+                            <h6 class="font-medium"><i class="ri-bookmark-line font-medium me-1"></i>Category :</h6>
+                        </div>
+                        <div class="w-7/12">
+                            <p class="text-slate-400 text-sm mt-1">Motion Graphics</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center mt-2">
+                        <div class="w-5/12">
+                            <h6 class="font-medium"><i class="ri-map-pin-line font-medium me-1"></i>Location :</h6>
+                        </div>
+                        <div class="w-7/12">
+                            <p class="text-slate-400 text-sm mt-1">2/64 Mongus Street, UK</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center mt-2">
+                        <div class="w-5/12">
+                            <h6 class="font-medium"><i class="ri-global-line font-medium me-1"></i>Website :</h6>
+                        </div>
+                        <div class="w-7/12">
+                            <p class="text-slate-400 text-sm mt-1">www.yourdomain.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div><!--end col-->
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End -->
+
+{% endblock %}

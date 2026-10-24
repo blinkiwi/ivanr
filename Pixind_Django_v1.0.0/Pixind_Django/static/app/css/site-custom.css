@@ -1,0 +1,37 @@
+/* ==========================================================================
+   Ajustes propios del sitio (van DESPUÉS de output.css y tailwind.css)
+
+   Logo del menú sticky: tope de tamaño. La imagen se escala sola hasta el
+   ancho/alto máximo indicado sin deformarse (object-fit: contain), así un
+   logo subido desde el panel nunca desborda la barra de navegación.
+   ========================================================================== */
+
+#topnav .logo {
+    display: flex;
+    align-items: center;
+    max-width: 220px;          /* ancho máximo del área del logo */
+}
+
+#topnav .logo img {
+    max-width: 100%;           /* nunca más ancho que su contenedor */
+    max-height: 56px;          /* y nunca más alto que la barra */
+    width: auto;
+    height: auto;
+    object-fit: contain;       /* se adapta manteniendo la proporción */
+}
+
+/* Logo del pie de página (misma imagen subida desde el panel) */
+footer a > img {
+    max-width: 200px;
+    max-height: 52px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Móvil: barra más compacta */
+@media (max-width: 640px) {
+    #topnav .logo { max-width: 165px; }
+    #topnav .logo img { max-height: 44px; }
+    footer a > img { max-width: 150px; max-height: 42px; }
+}

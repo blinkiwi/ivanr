@@ -1,0 +1,53 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block title %}{{ block.super }}{% endblock %}
+
+{% block content %}
+<div id="content-main">
+
+    <section class="admin-hero">
+        <div class="admin-hero-text">
+            <p class="eyebrow">{% translate 'CMS' %}</p>
+            <h2>{% translate 'Panel de contenido' %}</h2>
+            <p class="muted">{% translate 'Elige un bloque y edítalo: cada tarjeta abre directamente su formulario.' %}</p>
+        </div>
+        <div class="admin-hero-actions">
+            <a class="btn btn-ghost" href="{% url 'admin:index' %}">{% translate 'Dashboard' %}</a>
+            <a class="btn btn-primary" href="/" target="_blank" rel="noopener">{% translate 'Ver sitio' %} ↗</a>
+        </div>
+    </section>
+
+    <section class="kpi-grid cms-grid">
+        {% for b in cms_blocks %}
+        <a class="kpi-card cms-card{% if b.is_sections %} is-sections{% endif %}" href="{{ b.url }}">
+            <span class="kpi-icon" aria-hidden="true">{{ b.icon }}</span>
+            <span class="kpi-count">{{ b.count }}</span>
+            <span class="kpi-label">{{ b.title }}</span>
+            <span class="cms-summary">{{ b.summary }}</span>
+            <span class="cms-desc">{{ b.desc }}</span>
+            <span class="cms-cta">{% translate 'Editar' %} →</span>
+        </a>
+        {% endfor %}
+    </section>
+
+    <section class="panel">
+        <header class="panel-head">
+            <h3>{% translate 'Secciones del home' %}</h3>
+            <span class="panel-hint">{% translate 'Toca una sección para editar su título y textos' %}</span>
+        </header>
+        <div class="cms-sections">
+            {% for s in cms_sections %}
+            <a class="cms-section" href="{{ s.url }}">
+                <span class="cms-section-title">{{ s.title }}</span>
+                {% if s.eyebrow %}<span class="cms-section-eyebrow">{{ s.eyebrow }}</span>{% endif %}
+                <span class="cms-section-key">{{ s.key }}</span>
+            </a>
+            {% empty %}
+            <p class="muted">{% translate 'Sin secciones todavía.' %}</p>
+            {% endfor %}
+        </div>
+    </section>
+
+</div>
+{% endblock %}

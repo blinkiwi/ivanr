@@ -1,0 +1,62 @@
+{% load static cms_tags %}
+<!-- Footer Start -->
+<footer class="relative bg-slate-900 dark:bg-slate-800">
+    <div class="container relative">
+        <div class="grid grid-cols-1">
+            <div class="py-15 px-0">
+                <div class="grid md:grid-cols-2 grid-cols-1 lg:flex justify-between gap-6">
+                    <div class="lg:w-3/7">
+                        <p class="text-slate-300">{{ footer_description }}</p>
+                        <ul class="list-none mt-6">
+                            {% for s in footer_socials %}
+                            <li class="inline"><a href="{{ s.url }}" target="_blank" class="size-8 inline-flex items-center justify-center tracking-wide align-middle text-base border border-gray-700 hover:border-primary rounded-md text-slate-300 hover:text-white hover:bg-primary"><i class="{{ s.icon }} leading-none"></i></a></li>
+                            {% endfor %}
+                        </ul><!--end icon-->
+                    </div><!--end col-->
+    
+                    <div class="lg:w-fit">
+                        <div class="grid md:grid-cols-2 grid-cols-1 gap-6">
+                            {% for col in footer_columns %}
+                            <div class="">
+                                <h5 class="tracking-[1px] text-lg text-slate-100 font-semibold">{{ col.heading }}</h5>
+                                <ul class="list-none footer-list mt-6">
+                                    {% for link in col.links %}
+                                    <li class="{% if not forloop.first %}mt-2.5{% endif %}"><a href="{{ link.url }}" class="group inline-flex items-center text-slate-300 hover:text-slate-200 duration-500 ease-in-out"><i class="ri-arrow-right-up-line text-[15px] me-1 group-hover:rotate-45 duration-500"></i> {{ link.label }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div><!--end col-->
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div><!--end grid-->
+            </div><!--end col-->
+
+            <div class="py-7.5 px-0 border-t border-gray-800 dark:border-gray-700">
+                <div class="grid md:grid-cols-2 items-center">
+                    <div class="md:text-start text-center">
+                        <a href="#" class="text-[22px] focus:outline-none">
+                            <img src="{% if logo %}{{ logo.url }}{% else %}{% static 'app/images/logo-light.png' %}{% endif %}" class="mx-auto md:me-auto md:ms-0" alt="{{ site_name }}">
+                        </a>
+                    </div>
+
+                    <ul class="list-none footer-list md:text-end text-center mt-6 md:mt-0">
+                        {% for link in footer_bottom_links %}
+                        <li class="inline {% if not forloop.first %}ms-4{% endif %}"><i class="ri-circle-fill text-[6px] leading-none align-middle text-slate-300"></i> <a href="{{ link.url }}" class="text-slate-300 hover:text-slate-200 duration-500 ease-in-out">{{ link.label }}</a></li>
+                        {% endfor %}
+                    </ul><!--end icon-->
+                </div><!--end grid-->
+            </div>
+        </div>
+    </div><!--end container-->
+
+    <div class="py-7.5 px-0 border-t border-gray-800 dark:border-gray-700">
+            <div class="container relative text-center">
+                <div class="grid grid-cols-1">
+                    <div class="text-center">
+                        <p class="text-slate-300">© <script>document.write(new Date().getFullYear())</script> {{ copyright_text|rstrip_dot }}{% if credits_text %}. {{ credits_text }} <i class="ri-heart-fill text-red-600"></i> {% if credits_by %}{{ credits_by }} {% endif %}<a href="{{ credits_url }}" class="text-reset">{{ credits_name }}</a>{% endif %}.</p>
+                    </div>
+                </div><!--end grid-->
+            </div><!--end container-->
+        </div>
+    </footer><!--end footer-->
+<!-- Footer End -->

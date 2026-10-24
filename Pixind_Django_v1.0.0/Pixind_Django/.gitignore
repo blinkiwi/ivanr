@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.py[cod]
+*.log
+
+# Entorno
+venv/
+node_modules/
+.env
+
+# Sistema
+.DS_Store

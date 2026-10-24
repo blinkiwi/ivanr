@@ -1,0 +1,41 @@
+{% extends "Base/base.html" %}
+
+{% block hero_content %}
+
+{% include 'Base/navbar2.html' %}
+
+<!-- Start Hero -->
+<section class="relative table w-full py-24 bg-no-repeat bg-center bg-cover" style="background-image:url('{% static 'app/images/bg/4.jpg' %}')">
+    <div class="absolute inset-0 bg-slate-900/60"></div>
+    <div class="container relative">
+        <div class="grid grid-cols-1 text-center mt-10">
+            <h1 class="font-bold text-white lg:leading-tight leading-tight text-3xl wow animate__animated animate__fadeInUp" data-wow-delay=".4s">Latest Blogs</h1>
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+</section><!--end section-->
+<!-- End Hero -->
+
+<!-- Start -->
+<section class="relative lg:py-24 py-16">
+    <div class="container relative">
+        <div class="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-6">
+
+            <!-- Components/Pages/latest-blogs.html -->
+            {% include 'Components/Pages/latest-blogs.html' %}
+
+        </div><!--end grid-->
+
+        <div class="grid md:grid-cols-12 grid-cols-1 mt-6 wow animate__animated animate__fadeInUp" data-wow-delay="1s">
+            <div class="md:col-span-12 text-center">
+                
+                <!-- Components/Pages/nav.html -->
+                {% include 'Components/Pages/nav.html' %}
+
+            </div>
+        </div><!--end grid-->
+    </div><!--end container-->
+</section><!--end section-->
+<!-- End -->
+
+{% endblock %}

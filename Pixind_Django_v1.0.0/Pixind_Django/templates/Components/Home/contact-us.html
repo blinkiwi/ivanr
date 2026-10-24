@@ -1,0 +1,50 @@
+<div class="lg:col-span-8">
+    <div class="p-6 rounded-md shadow-sm bg-white dark:bg-slate-900 wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
+        <form>
+            <p class="mb-0" id="error-msg"></p>
+            <div id="simple-msg"></div>
+            <div class="grid lg:grid-cols-12 lg:gap-6">
+                <div class="lg:col-span-6 mb-5">
+                    <input name="name" id="name" type="text" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none" placeholder="{{ sections.contactus.form_name_label }}">
+                </div>
+
+                <div class="lg:col-span-6 mb-5">
+                    <input name="email" id="email" type="email" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none" placeholder="{{ sections.contactus.form_email_label }}">
+                </div><!--end col-->
+            </div>
+
+            <div class="grid grid-cols-1">
+                <div class="mb-5">
+                    <input name="subject" id="subject" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-10 outline-none" placeholder="{{ sections.contactus.form_subject_label }}">
+                </div>
+                <div class="mb-5">
+                    <textarea name="comments" id="comments" class="form-input w-full py-2 px-3 border border-gray-100 dark:border-gray-800 focus:ring-0 focus:border-primary/50 dark:bg-slate-900 dark:text-slate-200 rounded h-28 outline-none textarea" placeholder="{{ sections.contactus.form_message_label }}"></textarea>
+                </div>
+            </div>
+            <button type="submit" id="submit" name="send" class="group h-10 px-4 text-menu tracking-wider inline-flex items-center justify-center font-medium rounded-md bg-primary/10 hover:bg-primary text-primary hover:text-white">{{ sections.contactus.form_button_label }}</button>
+        </form>
+    </div>
+</div>
+
+<div class="lg:col-span-4 wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
+    <div class="lg:ms-6">
+        {% for c in contacts %}
+        <div class="flex{% if not forloop.first %} mt-6{% endif %}">
+            <div class="flex align-middle justify-center items-center size-12 mt-1 bg-primary/5 dark:bg-primary/10 text-primary rounded-md text-xl shadow-sm shadow-gray-200 dark:shadow-gray-800 duration-500">
+                <i class="{{ c.icon }}"></i>
+            </div>
+
+            <div class="flex-1 ms-3">
+                <h5 class="text-lg dark:text-white font-medium">{{ c.label }}</h5>
+                {% if c.label|lower == 'phone' %}
+                <a href="tel:{{ c.value }}" class="text-slate-400">{{ c.value }}</a>
+                {% elif c.label|lower == 'email' %}
+                <a href="mailto:{{ c.value }}" class="text-slate-400">{{ c.value }}</a>
+                {% else %}
+                <p class="text-slate-400 mb-2">{{ c.value }}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>

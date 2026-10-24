@@ -1,0 +1,41 @@
+<div id="accordion-collapse" data-accordion="collapse" class="grid md:grid-cols-2 grid-cols-1 mt-6 md:gap-6">
+    <div>
+        {% for item in faqs|slice:":4" %}
+        <div class="relative shadow-sm shadow-gray-200 dark:shadow-gray-800 rounded-md overflow-hidden{% if not forloop.first %} mt-4{% endif %} wow animate__animated animate__fadeInUp" data-wow-delay=".{{ forloop.counter }}s">
+            <h2 class="text-base font-semibold" id="accordion-collapse-heading-{{ forloop.counter }}">
+                <button type="button" class="flex justify-between items-center p-5 w-full font-medium text-start" data-accordion-target="#accordion-collapse-body-{{ forloop.counter }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="accordion-collapse-body-{{ forloop.counter }}">
+                    <span>{{ item.question }}</span>
+                    <svg data-accordion-icon class="size-4{% if forloop.first %} rotate-180{% endif %} shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </h2>
+            <div id="accordion-collapse-body-{{ forloop.counter }}" class="{% if not forloop.first %}hidden{% endif %}" aria-labelledby="accordion-collapse-heading-{{ forloop.counter }}">
+                <div class="p-5">
+                    <p class="text-slate-400 dark:text-gray-400">{{ item.answer }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div>
+        {% for item in faqs|slice:"4:" %}
+        <div class="relative shadow-sm shadow-gray-200 dark:shadow-gray-800 rounded-md overflow-hidden{% if forloop.first %} md:mt-0 mt-4{% else %} mt-4{% endif %} wow animate__animated animate__fadeInUp" data-wow-delay=".{{ forloop.counter|add:4 }}s">
+            <h2 class="text-base font-semibold" id="accordion-collapse-heading-{{ forloop.counter|add:4 }}">
+                <button type="button" class="flex justify-between items-center p-5 w-full font-medium text-start" data-accordion-target="#accordion-collapse-body-{{ forloop.counter|add:4 }}" aria-expanded="false" aria-controls="accordion-collapse-body-{{ forloop.counter|add:4 }}">
+                    <span>{{ item.question }}</span>
+                    <svg data-accordion-icon class="size-4 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </h2>
+            <div id="accordion-collapse-body-{{ forloop.counter|add:4 }}" class="hidden" aria-labelledby="accordion-collapse-heading-{{ forloop.counter|add:4 }}">
+                <div class="p-5">
+                    <p class="text-slate-400 dark:text-gray-400">{{ item.answer }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div><!--end grid-->
