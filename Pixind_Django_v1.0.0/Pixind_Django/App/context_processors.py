@@ -32,15 +32,19 @@ def _image(db_value, default=''):
 
 def _hero_dict(obj):
     data = dict(D.HERO)
+    data.update(show_subtitle=True, show_cta=True)
     if obj:
         data.update({
             'title': obj.title or data['title'],
             'title_line2': obj.title_line2 or data['title_line2'],
-            'subtitle': obj.subtitle or data['subtitle'],
-            'button_text': obj.button_text or data['button_text'],
+            # opcionales: el valor vacio del panel se respeta (el hero los oculta)
+            'subtitle': obj.subtitle,
+            'button_text': obj.button_text,
             'button_link': obj.button_link or data['button_link'],
-            'video_id': obj.video_id or data['video_id'],
-            'video_label': obj.video_label or data['video_label'],
+            'video_id': obj.video_id,
+            'video_label': obj.video_label,
+            'show_subtitle': bool(obj.show_subtitle),
+            'show_cta': bool(obj.show_cta),
             'card_title': obj.card_title or data['card_title'],
             'card_name_label': obj.card_name_label or data['card_name_label'],
             'card_email_label': obj.card_email_label or data['card_email_label'],
@@ -185,10 +189,15 @@ def global_context(request):
 
     # --- bloques del home en su orden (reordenable con drag & drop) --------
     _labels = dict(D.HOME_BLOCKS)
-    _orden = [b.key for b in _rows(HomeBlock) if b.key in _labels]
+    _hb = _rows(HomeBlock)
+    _orden = [b.key for b in _hb if b.key in _labels]
     _orden += [k for k in _labels if k not in _orden]
+    _visibles = {b.key: b.visible for b in _hb}
+    _elegidos = [k for k in _orden if _visibles.get(k, True)]
+    if not _elegidos:          # red de seguridad: si esta todo oculto, se muestra todo
+        _elegidos = _orden
     home_blocks = [{'key': k, 'label': _labels[k], 'tpl': D.BLOCK_TPL[k]}
-                   for k in _orden if k in D.BLOCK_TPL]
+                   for k in _elegidos if k in D.BLOCK_TPL]
 
     # --- listas ------------------------------------------------------------
     feature_objs = _rows(FeatureBlock)

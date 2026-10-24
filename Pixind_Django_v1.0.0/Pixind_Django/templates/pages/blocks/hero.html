@@ -5,12 +5,16 @@
         <div class="grid md:grid-cols-12 grid-cols-1 items-center gap-6">
             <div class="lg:col-span-8 md:col-span-7">
                 <h1 class="font-bold text-white lg:leading-tight leading-tight text-4xl lg:text-6xl md:text-5xl mb-5 wow animate__animated animate__fadeInUp" data-wow-delay=".4s">{{ hero.title }}{% if hero.title_line2 %} <br> {{ hero.title_line2 }}{% endif %}</h1>
+                {% if hero.show_subtitle and hero.subtitle %}
                 <p class="text-white/70 text-lg max-w-xl wow animate__animated animate__fadeInUp" data-wow-delay=".6s">{{ hero.subtitle }}</p>
-                
+                {% endif %}
+
+                {% if hero.show_cta and hero.button_text or hero.show_cta and hero.video_id %}
                 <div class="mt-6 wow animate__animated animate__fadeInUp" data-wow-delay=".8s">
-                    <a href="{{ hero.button_link }}" class="group h-11 px-6 tracking-wider inline-flex items-center text-sm justify-center font-bold rounded-md bg-white text-primary me-1">{{ hero.button_text }} <i class="ri-arrow-right-up-line align-middle group-hover:rotate-45 duration-500 ms-1"></i></a>
-                    <a href="#!" data-type="youtube" data-id="{{ hero.video_id }}" class="size-10 inline-flex items-center justify-center text-base rounded-full bg-primary text-white lightbox"><i class="ri-play-fill"></i></a><span class="font-semibold ms-1 text-white/70 align-middle">{{ hero.video_label }}</span>
+                    {% if hero.button_text %}<a href="{{ hero.button_link }}" class="group h-11 px-6 tracking-wider inline-flex items-center text-sm justify-center font-bold rounded-md bg-white text-primary me-1">{{ hero.button_text }} <i class="ri-arrow-right-up-line align-middle group-hover:rotate-45 duration-500 ms-1"></i></a>{% endif %}
+                    {% if hero.video_id %}<a href="#!" data-type="youtube" data-id="{{ hero.video_id }}" class="size-10 inline-flex items-center justify-center text-base rounded-full bg-primary text-white lightbox"><i class="ri-play-fill"></i></a>{% if hero.video_label %}<span class="font-semibold ms-1 text-white/70 align-middle">{{ hero.video_label }}</span>{% endif %}{% endif %}
                 </div>
+                {% endif %}
             </div>
             
             <div class="lg:col-span-4 md:col-span-5">

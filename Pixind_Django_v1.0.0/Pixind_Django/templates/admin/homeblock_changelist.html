@@ -7,6 +7,7 @@
   #result_list tbody tr:hover { cursor: grab; }
   #result_list tbody tr:active { cursor: grabbing; }
   #result_list tbody tr.rz-dragging { opacity: .35; }
+  #result_list .rz-visible { width: 18px; height: 18px; accent-color: #4ec163; cursor: pointer; }
   .rz-move-btn { border: 1px solid #c8ccd4; background: #fff; color: #444; border-radius: 6px;
                  padding: 1px 7px; cursor: pointer; line-height: 1.4; font-size: 11px; }
   .rz-move-btn:hover { background: #f0f2f5; }
@@ -82,6 +83,38 @@
       wrap.appendChild(b);
     });
     celda.appendChild(wrap);
+  });
+
+  /* visibilidad: activar/desactivar bloques desde la casilla de la fila */
+  function pintarFila(cb, visible) {
+    const tr = cb.closest('tr');
+    if (tr) tr.style.opacity = visible ? '' : '.45';
+  }
+  document.querySelectorAll('#result_list .rz-visible').forEach(function (cb) {
+    if (!cb.checked) pintarFila(cb, false);
+    cb.addEventListener('change', async function () {
+      const antes = cb.checked;
+      try {
+        const csrf = (document.cookie.match(/(?:^|;\s*)csrftoken=([^;]+)/) || [])[1] || '';
+        const r = await fetch("{% url 'admin:homeblock-toggle' %}", {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrf },
+          body: JSON.stringify({ id: parseInt(cb.getAttribute('data-id'), 10) })
+        });
+        const data = await r.json().catch(function () { return {}; });
+        if (r.ok && data.ok) {
+          cb.checked = !!data.visible;
+          pintarFila(cb, !!data.visible);
+          aviso(true);
+        } else {
+          cb.checked = antes;
+          aviso(false);
+        }
+      } catch (e) {
+        cb.checked = antes;
+        aviso(false);
+      }
+    });
   });
 
   /* drag & drop nativo */

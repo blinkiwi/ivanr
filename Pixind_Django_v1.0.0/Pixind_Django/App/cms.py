@@ -85,8 +85,9 @@ def build_blocks():
          "url": _list_url(SectionBlock), "count": SectionBlock.objects.count(),
          "is_list": True, "is_sections": True},
         add_card("↕", "Orden de bloques (drag & drop)",
-                 "Arrastra las filas para mover los bloques del home",
-                 HomeBlock, f"{HomeBlock.objects.count()} bloques"),
+                 "Arrastra para mover; marca/desmarca la casilla Visible para ocultar bloques",
+                 HomeBlock, f"{HomeBlock.objects.filter(visible=True).count()}"
+                            f"/{HomeBlock.objects.count()} visibles"),
         add_card("✦", "Features (cards)",
                  "Icono, título y texto de las tarjetas de features",
                  FeatureBlock, f"{FeatureBlock.objects.count()} tarjetas"),

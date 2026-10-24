@@ -88,11 +88,16 @@ class HeaderBlock(models.Model):
     """Hero / seccion superior del home (singleton, order=0)."""
     title = models.CharField(max_length=255, default='', verbose_name='Titulo linea 1')
     title_line2 = models.CharField(max_length=255, default='', blank=True, verbose_name='Titulo linea 2')
-    subtitle = models.CharField(max_length=500, default='', verbose_name='Descripcion')
-    button_text = models.CharField(max_length=100, default='Contact Us', verbose_name='Boton principal texto')
+    subtitle = models.CharField(max_length=500, default='', blank=True, verbose_name='Descripcion (vacio = oculta)')
+    button_text = models.CharField(max_length=100, default='Contact Us', blank=True,
+                                   verbose_name='Boton principal texto (vacio = oculto)')
     button_link = models.CharField(max_length=255, default='', blank=True, verbose_name='Boton principal enlace')
     video_id = models.CharField(max_length=50, default='S_CGed6E610', blank=True, verbose_name='Video YouTube ID')
     video_label = models.CharField(max_length=100, default='Watch Now', blank=True, verbose_name='Texto junto al video')
+    show_subtitle = models.BooleanField(default=True,
+                                        verbose_name='Mostrar la descripcion (Titulos y texto)')
+    show_cta = models.BooleanField(default=True,
+                                   verbose_name='Mostrar el boton principal + video')
     image = models.ImageField(upload_to='header_blocks/', blank=True, null=True,
                               verbose_name='Imagen de fondo (si esta vacia usa la del template)')
     card_title = models.CharField(max_length=255, default='', blank=True, verbose_name='Titulo de la tarjeta')
@@ -453,6 +458,7 @@ class HomeBlock(models.Model):
     key = models.CharField(max_length=30, unique=True, verbose_name='Clave interna')
     label = models.CharField(max_length=100, verbose_name='Nombre del bloque')
     order = models.PositiveIntegerField(default=0, verbose_name='Posicion')
+    visible = models.BooleanField(default=True, verbose_name='Visible en la web')
 
     class Meta:
         ordering = ('order', 'id')

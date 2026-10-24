@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 from .models import (
     HomeBlock,
     SiteConfig, StickyNav, NavItem, HeaderBlock, SectionBlock, FeatureBlock,
@@ -46,6 +47,25 @@ def _reorder_homeblocks(request):
     return JsonResponse({"ok": True, "count": len(ids)})
 
 
+def _toggle_homeblock(request):
+    """POST {"id": n} -> activa/desactiva un bloque del home."""
+    import json as _json
+    from django.http import JsonResponse
+    if request.method != "POST":
+        return JsonResponse({"ok": False, "error": "Se espera POST"}, status=405)
+    try:
+        pk = int(_json.loads(request.body.decode("utf-8")).get("id"))
+    except Exception:
+        return JsonResponse({"ok": False, "error": "Payload invalido"}, status=400)
+    from .models import HomeBlock as _HB
+    bloque = _HB.objects.filter(pk=pk).first()
+    if bloque is None:
+        return JsonResponse({"ok": False, "error": "Bloque no encontrado"}, status=404)
+    bloque.visible = not bloque.visible
+    bloque.save(update_fields=["visible"])
+    return JsonResponse({"ok": True, "visible": bloque.visible})
+
+
 def _get_urls_with_cms(self):
     from django.contrib.admin.views.decorators import staff_member_required
     from django.urls import path as _path
@@ -54,6 +74,8 @@ def _get_urls_with_cms(self):
         _path("cms/", staff_member_required(_cms_home), name="cms-home"),
         _path("homeblock/reorder/", staff_member_required(_reorder_homeblocks),
               name="homeblock-reorder"),
+        _path("homeblock/toggle/", staff_member_required(_toggle_homeblock),
+              name="homeblock-toggle"),
     ] + _orig_get_urls(self)
 
 
@@ -119,8 +141,16 @@ class HeaderBlockAdmin(admin.ModelAdmin):
     list_display = ('title', 'title_line2', 'button_text', 'order')
 
     fieldsets = (
-        ('Titulos y texto', {'fields': ('title', 'title_line2', 'subtitle', 'order')}),
-        ('Boton principal + video', {'fields': ('button_text', 'button_link', 'video_id', 'video_label')}),
+        ('Titulos y texto', {
+            'fields': ('title', 'title_line2', 'subtitle', 'show_subtitle', 'order'),
+            'description': 'La descripcion es opcional: desmarca "Mostrar" o deja el texto vacio '
+                           'y el hero la oculta.',
+        }),
+        ('Boton principal + video', {
+            'fields': ('show_cta', 'button_text', 'button_link', 'video_id', 'video_label'),
+            'description': 'Desmarca "Mostrar el boton principal + video" para ocultar la fila '
+                           'completa; tambien se ocultan los campos que dejes vacios.',
+        }),
         ('Fondo', {'fields': ('image',)}),
         ('Tarjeta del formulario', {
             'fields': ('card_title', 'card_name_label', 'card_email_label',
@@ -178,13 +208,20 @@ class SectionBlockAdmin(admin.ModelAdmin):
 @admin.register(HomeBlock)
 class HomeBlockAdmin(admin.ModelAdmin):
     """Filas arrastrables: reordenan los bloques del home (drag & drop)."""
-    list_display = ('position', 'label', 'key')
+    list_display = ('position', 'label', 'visible_col', 'key')
     ordering = ('order',)
     change_list_template = 'admin/homeblock_changelist.html'
 
     @admin.display(description='#', ordering='order')
     def position(self, obj):
         return obj.order + 1
+
+    @admin.display(description='Visible')
+    def visible_col(self, obj):
+        marcado = ' checked' if obj.visible else ''
+        return mark_safe(
+            f'<input type="checkbox" class="rz-visible" data-id="{obj.pk}"{marcado} '
+            f'title="Mostrar/ocultar este bloque en la web">')
 
 
 @admin.register(FeatureBlock)
